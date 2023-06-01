@@ -4,6 +4,8 @@ const colors = {
   submitButton: '#1877F2',
   neutral: '#FFFFFF',
   placeholder: '#9F9F9F',
+  modal: '#171717',
+  searchIcon: '#C6C6C6',
 };
 
 export default colors;
