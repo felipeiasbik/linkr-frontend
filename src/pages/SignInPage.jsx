@@ -3,7 +3,8 @@
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import jwtDecode from 'jwt-decode';
 import SideLogo from '../components/SideLogo.jsx';
 import {
   SignInContainer,
@@ -19,6 +20,14 @@ export default function SignInPage() {
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const { setUserData } = useContext(UserContext);
+
+  useEffect(() => {
+    const token = localStorage.getItem('linkr_token');
+    if (token) {
+      navigate('/timeline');
+    }
+  }, []);
+
   async function submitForm(form) {
     setDisabled(true);
     const keys = Object.keys(form);
@@ -32,8 +41,19 @@ export default function SignInPage() {
 
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/signin`, form);
-      localStorage.setItem('linkr_token', response.data.token);
-      setUserData(response.data.userData);
+      localStorage.setItem('linkr_token', JSON.stringify(response.data.token));
+      const {
+        email,
+        id,
+        name,
+        photo,
+      } = jwtDecode(response.data.token);
+      setUserData({
+        email,
+        id,
+        name,
+        photo,
+      });
       setDisabled(false);
       return navigate('/timeline');
     } catch (error) {
@@ -45,7 +65,7 @@ export default function SignInPage() {
       }
 
       if (error?.response.status === 404) return alert(error.response.data.message);
-
+      console.error(error);
       return alert('There was an unexpected error!');
     }
   }
