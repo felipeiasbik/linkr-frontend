@@ -13,7 +13,6 @@ flex-direction: column;
 background-color: ${colors.modal};
 border-radius: 16px;
 width: 300px;
-box-sizing: border-box;
 color: #ffffff;
 font-weight: 700;
 h2 {
@@ -21,7 +20,6 @@ font-family: ${fonts.secondary};
 font-size: 27px;
 padding: 15px 20px 17px 20px;
 position: relative;
-box-sizing: border-box;
 }
 `;
 export const Separeted = styled.div`
@@ -32,11 +30,9 @@ width: 300px;
 margin-left: -15px;
 margin-top: 50px;
 position: absolute;
-box-sizing: border-box;
 `;
 export const TagsContanier = styled.div`
 padding: 10px 20px 30px 20px;
-box-sizing: border-box;
 border-top: 1px solid #484848;
 `;
 export const Tags = styled.div`
@@ -45,5 +41,4 @@ flex-direction: column;
 margin-top: 10px;
 font-size: 19px;
 font-family: ${fonts.main};
-box-sizing: border-box;
 `;

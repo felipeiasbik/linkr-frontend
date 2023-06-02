@@ -7,6 +7,7 @@ const colors = {
   modal: '#171717',
   searchIcon: '#C6C6C6',
   border: '#484848',
+  description: '#B7B7B7',
 };
 
 export default colors;

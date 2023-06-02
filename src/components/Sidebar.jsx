@@ -2,13 +2,12 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   ListTags, Tags, TagsContanier, LinkIds,
 } from '../styles/sidebarStyles.js';
 
 export default function Sidebar() {
-  const { hashtag } = useParams();
   const navigate = useNavigate();
   const [hashtags, setHashtags] = useState();
 
@@ -30,15 +29,14 @@ export default function Sidebar() {
         });
     }
   }, []);
-  console.log(hashtags);
 
   return (
-    <ListTags>
+    <ListTags data-test="trending">
       <h2>trending</h2>
       <TagsContanier>
         {hashtags?.map(({ tag }) => (
           <LinkIds to={`/hashtag/${tag.replace('#', '')}`}>
-            <Tags key={tag}>
+            <Tags data-test="hashtag" key={tag}>
               #
               {' '}
               {tag.replace('#', '')}
