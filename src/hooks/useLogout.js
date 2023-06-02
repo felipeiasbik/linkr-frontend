@@ -1,4 +1,4 @@
-/* eslint-disable quote-props */
+/* eslint-disable quote-props, no-console */
 
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -20,17 +20,18 @@ export default function useLogout(boolean) {
     };
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/signout/${userId}`, {}, config);
+    } catch (error) {
+      console.error(error);
+    } finally {
       localStorage.removeItem('linkr_token');
       setUserData(null);
       navigate('/');
-    } catch (error) {
-      console.log(error);
     }
   }
 
-  if (logout) tryToLogout();
-  const handleLogout = (newBoolean) => setLogout(newBoolean);
-  return [logout, handleLogout];
-}
+  if (logout) return tryToLogout();
 
-// navigate('/');
+  const handleLogout = (newBoolean) => setLogout(newBoolean);
+
+  return { logout, handleLogout };
+}

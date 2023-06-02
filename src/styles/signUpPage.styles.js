@@ -1,7 +1,15 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import fonts from '../constants/fonts.js';
 import colors from '../constants/colors.js';
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 export const SignUpContainer = styled.div`
   color: ${colors.neutral};
   display: flex;
@@ -12,6 +20,7 @@ export const SignUpContainer = styled.div`
 `;
 
 export const SignUpForm = styled.form`
+  animation: ${fadeIn} .5s ease-in;
   font-family:${fonts.main} ;
   display: flex;
   justify-content: center;

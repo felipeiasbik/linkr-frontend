@@ -1,15 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
-  DesktopHeaderContainer,
-  MobileHeaderContainer,
+  HeaderContainer,
   HeaderLogo,
   SearchBar,
   SearchInput,
-  SearchButton,
-  InteractiveButton,
+  MenuButton,
   UserImg,
-  MobileLogoContainer,
-  SearchBarContainer,
   ArrowDown,
   SearchIcon,
 } from '../styles/headerStyles.js';
@@ -20,7 +17,7 @@ export default function Header() {
   const { userData } = useContext(UserContext);
   const [viewWindow, setViewWindow] = useState(window.innerWidth);
   const [openModal, setOpenModal] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
 
   function handleResize() {
     setViewWindow(window.innerWidth);
@@ -28,7 +25,6 @@ export default function Header() {
 
   function openOptions(e) {
     setOpenModal(true);
-    setAnchorEl(e.target);
   }
 
   useEffect(() => {
@@ -39,45 +35,25 @@ export default function Header() {
     };
   }, []);
 
-  if (viewWindow <= 768) {
-    return (
-      <MobileHeaderContainer>
-        <MobileLogoContainer>
-          <HeaderLogo>linkr</HeaderLogo>
-          <InteractiveButton type="button" onClick={openOptions}>
-            <ArrowDown modalIsOpen={openModal} />
-            <UserImg src={userData.photo} />
-          </InteractiveButton>
-        </MobileLogoContainer>
-        <SearchBarContainer>
-          <SearchBar>
-            <SearchInput
-              type="text"
-              placeholder="Search for people"
-            />
-            <SearchButton><SearchIcon /></SearchButton>
-          </SearchBar>
-        </SearchBarContainer>
-        <Menu openModal={openModal} setOpenModal={setOpenModal} anchorEl={anchorEl} />
-      </MobileHeaderContainer>
-    );
-  }
-
   return (
-    <DesktopHeaderContainer>
-      <HeaderLogo>linkr</HeaderLogo>
+    <HeaderContainer>
+      <HeaderLogo onClick={() => navigate('/timeline')}>linkr</HeaderLogo>
       <SearchBar>
         <SearchInput
           type="text"
-          placeholder="Search for people"
+          placeholder={viewWindow <= 768 ? 'Search for people and friends' : 'Search for people'}
         />
-        <SearchButton><SearchIcon /></SearchButton>
+        <SearchIcon />
       </SearchBar>
-      <InteractiveButton type="button" onClick={openOptions}>
-        <ArrowDown modalIsOpen={openModal} />
-        <UserImg src={userData.photo} />
-      </InteractiveButton>
-      <Menu openModal={openModal} setOpenModal={setOpenModal} anchorEl={anchorEl} />
-    </DesktopHeaderContainer>
+      <MenuButton type="button" onClick={openOptions}>
+        <ArrowDown open={openModal} />
+        <UserImg src={userData.photo} data-test="avatar" />
+      </MenuButton>
+      <Menu
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        data-test="menu"
+      />
+    </HeaderContainer>
   );
 }
