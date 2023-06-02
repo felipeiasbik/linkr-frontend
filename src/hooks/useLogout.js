@@ -29,7 +29,9 @@ export default function useLogout(boolean) {
     }
   }
 
-  if (logout) return tryToLogout();
+  useEffect(() => {
+    if (logout) tryToLogout();
+  }, [logout]);
 
   const handleLogout = (newBoolean) => setLogout(newBoolean);
 

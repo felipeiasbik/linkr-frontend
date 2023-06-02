@@ -58,7 +58,7 @@ export const Input = styled.input`
     color: ${colors.placeholder};
   }
   @media (max-width: 768px){
-    width: 90%;
+    width: 85%;
     height: 55px;
   }
 `;
@@ -75,7 +75,7 @@ export const SignUpButton = styled.button`
   border-radius: 6px;
   margin-top: 14px;
   @media (max-width: 768px){
-    width: 90%;
+    width: 85%;
     height: 55px;
   }
 `;
@@ -91,7 +91,7 @@ export const SwitchButton = styled.button`
   background-color: ${colors.main};
   text-decoration: underline;
   @media (max-width: 768px){
-    width: 90%;
+    width: 85%;
     height: 55px;
   }
 `;
