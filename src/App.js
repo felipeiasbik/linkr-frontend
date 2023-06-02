@@ -5,6 +5,7 @@ import ResetStyles from './styles/resetStyles.js';
 import GlobalStyles from './styles/globalStyles.js';
 import SignInPage from './pages/SignInPage.jsx';
 import TimelinePage from './pages/TimelinePage.jsx';
+import HashtagPage from './pages/HashtagPage.jsx';
 import Header from './components/Header.jsx';
 import { UserContext } from './context/userContext.jsx';
 import { MainContainer } from './styles/appStyles.js';
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<SignInPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/timeline" element={<TimelinePage />} />
+          <Route path="/hashtag/:hashtag" element={<HashtagPage />} />
         </Routes>
       </MainContainer>
     </BrowserRouter>

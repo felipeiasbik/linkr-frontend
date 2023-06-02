@@ -6,6 +6,7 @@ const colors = {
   placeholder: '#9F9F9F',
   modal: '#171717',
   searchIcon: '#C6C6C6',
+  border: '#484848',
 };
 
 export default colors;
