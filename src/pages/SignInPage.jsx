@@ -78,15 +78,17 @@ export default function SignInPage() {
           placeholder="e-mail"
           disabled={disabled}
           {...register('email')}
+          data-test="email"
         />
         <Input
           type="password"
           placeholder="password"
           disabled={disabled}
           {...register('password')}
+          data-test="password"
         />
-        <SignInButton disabled={disabled}>Log In</SignInButton>
-        <SwitchButton disabled={disabled} onClick={() => navigate('/sign-up')} type="button">First time? Create an account!</SwitchButton>
+        <SignInButton disabled={disabled} data-test="login-btn">Log In</SignInButton>
+        <SwitchButton disabled={disabled} onClick={() => navigate('/sign-up')} type="button" data-test="sign-up-link">First time? Create an account!</SwitchButton>
       </SignInForm>
     </SignInContainer>
   );
