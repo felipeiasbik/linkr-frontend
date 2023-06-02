@@ -31,8 +31,7 @@ display: flex;
 justify-content: flex-start;
 padding-bottom: 41px;
 @media (max-width: 768px){
-padding-left: 20px;
-padding-bottom: 30px;
+padding: 0 0 30px 20px;
   }
 `;
 export const SubContainer = styled.div`
