@@ -8,6 +8,7 @@ import TimelinePage from './pages/TimelinePage.jsx';
 import Header from './components/Header.jsx';
 import { UserContext } from './context/userContext.jsx';
 import { MainContainer } from './styles/appStyles.js';
+import SideLogo from './components/SideLogo.jsx';
 
 function App() {
   const { userData } = useContext(UserContext);
@@ -17,7 +18,7 @@ function App() {
 
       <ResetStyles />
       <GlobalStyles />
-      {userData && <Header />}
+      {userData ? <Header /> : <SideLogo />}
       <MainContainer logged={userData}>
         <Routes>
           <Route path="/" element={<SignInPage />} />

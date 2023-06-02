@@ -4,7 +4,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import fonts from '../constants/fonts.js';
 import colors from '../constants/colors.js';
 
-export const DesktopHeaderContainer = styled.div`
+export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,26 +13,9 @@ export const DesktopHeaderContainer = styled.div`
   height: 72px;
   background-color: ${colors.secondary};
   padding: 7px;
-`;
-export const MobileHeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  width: 100%;
-  height: 144px;
-  flex-direction: column;
-  background-color: ${colors.secondary};
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
-export const MobileLogoContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  height: 50%;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 7px;
-`;
 export const SearchBarContainer = styled.div`
   background-color: ${colors.main};
   width: 100%;
@@ -50,19 +33,25 @@ export const HeaderLogo = styled.h1`
   line-height: 54px;
   letter-spacing: 0.05em;
   color: ${colors.neutral};
+  cursor: pointer;
 `;
 
 export const SearchBar = styled.div`
+  transition: all;
   width: 563px;
   height: 45px;
-  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   @media (max-width: 768px){
     width: 100%;
-    height: 45px;
+    height: 80px;
+    position: absolute;
+    top: 72px;
+    background-color: ${colors.main};
+    left: 0;
+    padding: 15px;
   }
 `;
 
@@ -81,21 +70,13 @@ export const SearchInput = styled.input`
   &::placeholder{
     color: ${colors.placeholder};
   }
+  @media (max-width: 768px){
+    height: 60px;
+    padding-right: 45px;
+  }
 `;
 
-export const SearchButton = styled.button`
-  position: absolute;
-  right: 5px;
-  background-color: transparent;
-  border: none;
-  height: 100%;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const InteractiveButton = styled.button`
+export const MenuButton = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -123,4 +104,14 @@ export const ArrowDown = styled(IoIosArrowDown)`
 export const SearchIcon = styled(AiOutlineSearch)`
   font-size: 30px;
   color: ${colors.searchIcon};
+  position: absolute;
+  right: 10px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 768px){
+    right: 30px;
+  }
 `;

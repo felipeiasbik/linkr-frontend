@@ -10,6 +10,7 @@ export const SidePageLogoContainer = styled.div`
   height: 100vh;
   display: flex;
   align-items: flex-end;
+  color: ${colors.neutral};
   @media (max-width: 768px){
     height: 30%;
     width: 100%;

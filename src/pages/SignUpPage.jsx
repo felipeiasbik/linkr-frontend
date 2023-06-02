@@ -48,7 +48,6 @@ export default function SignUpPage() {
   }
   return (
     <SignUpContainer>
-      <SideLogo />
       <SignUpForm onSubmit={handleSubmit(submitForm)}>
 
         <Input

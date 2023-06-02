@@ -3,7 +3,7 @@ import { ModalBox, LogoutButton } from '../styles/menuStyles.js';
 import useLogout from '../hooks/useLogout.js';
 
 export default function Menu({ openModal, setOpenModal, anchorEl }) {
-  const [_, setLogout] = useLogout();
+  const { handleLogout: setLogout } = useLogout();
   return (
     <Modal
       open={openModal}
