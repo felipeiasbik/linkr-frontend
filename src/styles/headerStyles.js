@@ -95,7 +95,7 @@ export const UserImg = styled.img`
 `;
 
 export const ArrowDown = styled(IoIosArrowDown)`
-  transform: ${({ modalIsOpen }) => modalIsOpen && ' rotate(180deg)'};
+  transform: ${({ open }) => open && ' rotate(180deg)'};
   transition: all .3s;
   font-size: 40px;
   color: ${colors.neutral};

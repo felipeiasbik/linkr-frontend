@@ -17,7 +17,6 @@ export default function Header() {
   const { userData } = useContext(UserContext);
   const [viewWindow, setViewWindow] = useState(window.innerWidth);
   const [openModal, setOpenModal] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
   function handleResize() {
@@ -26,7 +25,6 @@ export default function Header() {
 
   function openOptions(e) {
     setOpenModal(true);
-    setAnchorEl(e.target);
   }
 
   useEffect(() => {
@@ -48,10 +46,14 @@ export default function Header() {
         <SearchIcon />
       </SearchBar>
       <MenuButton type="button" onClick={openOptions}>
-        <ArrowDown modalIsOpen={openModal} />
-        <UserImg src={userData.photo} />
+        <ArrowDown open={openModal} />
+        <UserImg src={userData.photo} data-test="avatar" />
       </MenuButton>
-      <Menu openModal={openModal} setOpenModal={setOpenModal} anchorEl={anchorEl} />
+      <Menu
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        data-test="menu"
+      />
     </HeaderContainer>
   );
 }
