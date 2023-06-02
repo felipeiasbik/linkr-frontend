@@ -44,6 +44,6 @@ display: flex;
 flex-direction: column;
 margin-top: 10px;
 font-size: 19px;
-font-family: ${fonts.main}
+font-family: ${fonts.main};
 box-sizing: border-box;
 `;
