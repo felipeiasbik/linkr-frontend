@@ -7,6 +7,6 @@ export const MainContainer = styled.div`
   height: 100vh;
 
   @media (max-width: 768px){
-    padding-top: ${({ logged }) => (logged ? '144px' : '')};
+    padding-top: ${({ logged }) => (logged ? '152px' : '')};
   }
 `;

@@ -71,7 +71,6 @@ export default function SignInPage() {
   }
   return (
     <SignInContainer>
-      <SideLogo />
       <SignInForm onSubmit={handleSubmit(submitForm)}>
 
         <Input
