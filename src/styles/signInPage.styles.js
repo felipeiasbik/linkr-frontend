@@ -17,6 +17,7 @@ export const SignInContainer = styled.div`
   height: 100vh;
   @media (max-width: 768px){
     flex-direction: column;
+    padding-top: 30vh;
   }
 `;
 
@@ -36,7 +37,6 @@ export const SignInForm = styled.form`
     height: 70%;
     width: 100%;
     margin-left: 0;
-    margin-top: 30vh;
   }
   button{
     color: ${colors.neutral};
@@ -60,7 +60,7 @@ export const Input = styled.input`
     color: ${colors.placeholder};
   }
   @media (max-width: 768px){
-    width: 90%;
+    width: 85%;
     height: 55px;
   }
 `;
@@ -77,7 +77,7 @@ export const SignInButton = styled.button`
   border-radius: 6px;
   margin-top: 14px;
   @media (max-width: 768px){
-    width: 90%;
+    width: 85%;
     height: 55px;
   }
 `;
@@ -93,7 +93,7 @@ export const SwitchButton = styled.button`
   background-color: ${colors.main};
   text-decoration: underline;
   @media (max-width: 768px){
-    width: 90%;
+    width: 85%;
     height: 55px;
   }
 `;
