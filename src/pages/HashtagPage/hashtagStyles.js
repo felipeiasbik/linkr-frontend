@@ -6,6 +6,9 @@ import fonts from '../../constants/fonts.js';
 export const LinkIds = styled(Link)`
     text-decoration: none;
     color: #ffffff;
+    span {
+      font-weight: 700;
+    }
 `;
 export const Container = styled.div`
 padding-top: 53px;
@@ -118,6 +121,7 @@ color: ${colors.description};
 padding: 20px;
 @media (max-width: 768px){
     width: 288px;
+    height: 115px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

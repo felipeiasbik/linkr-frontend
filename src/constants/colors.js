@@ -8,6 +8,8 @@ const colors = {
   searchIcon: '#C6C6C6',
   border: '#484848',
   description: '#B7B7B7',
+  search: '#515151',
+  resultSearch: '#E7E7E7',
 };
 
 export default colors;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { IoIosArrowDown } from 'react-icons/io';
-import { AiOutlineSearch } from 'react-icons/ai';
 import fonts from '../../constants/fonts.js';
 import colors from '../../constants/colors.js';
 
@@ -12,8 +11,9 @@ export const HeaderContainer = styled.div`
   width: 100%;
   height: 72px;
   background-color: ${colors.secondary};
-  padding: 7px;
+  padding: 7px 7px 7px 21px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
 `;
 
 export const SearchBarContainer = styled.div`
@@ -55,27 +55,6 @@ export const SearchBar = styled.div`
   }
 `;
 
-export const SearchInput = styled.input`
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  border: none;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 19px;
-  line-height: 23px;
-  font-family: ${fonts.secondary};
-  padding-left: 12px;
-  padding-right: 40px;
-  &::placeholder{
-    color: ${colors.placeholder};
-  }
-  @media (max-width: 768px){
-    height: 60px;
-    padding-right: 45px;
-  }
-`;
-
 export const MenuButton = styled.button`
   display: flex;
   justify-content: space-between;
@@ -99,19 +78,4 @@ export const ArrowDown = styled(IoIosArrowDown)`
   transition: all .3s;
   font-size: 40px;
   color: ${colors.neutral};
-`;
-
-export const SearchIcon = styled(AiOutlineSearch)`
-  font-size: 30px;
-  color: ${colors.searchIcon};
-  position: absolute;
-  right: 10px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (max-width: 768px){
-    right: 30px;
-  }
 `;
