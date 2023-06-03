@@ -2,17 +2,16 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import reactStringReplace from 'react-string-replace';
 import Sidebar from '../components/Sidebar.jsx';
 import {
-  LinkIds, Container, Title, SubContainer, Main, SideBar, Posts, InfoLeft, InfoRight, Articles,
+  Container, Title, SubContainer, Main, SideBar,
 } from '../styles/hashtagStyles.js';
+import { ListPosts } from '../components/PostsList.jsx';
 
 export default function HashtagPage() {
   const { hashtag } = useParams();
   const navigate = useNavigate();
   const [listPosts, setListPosts] = useState([]);
-  const [clickedLink, setClickedLink] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('linkr_token');
@@ -31,11 +30,7 @@ export default function HashtagPage() {
           alert(err.response.data);
         });
     }
-  }, [hashtag, clickedLink]);
-
-  const handleLinkClick = (clickedHashtag) => {
-    setClickedLink(clickedHashtag);
-  };
+  }, [hashtag]);
 
   return (
     <Container>
@@ -46,33 +41,7 @@ export default function HashtagPage() {
       </Title>
       <SubContainer>
         <Main>
-          {listPosts?.map(({
-            postId, url, description, name, photo,
-          }) => (
-            <Posts data-test="post" key={postId}>
-              <InfoLeft>
-                <img alt={name} src={photo} />
-              </InfoLeft>
-              <InfoRight>
-                <h2>{name}</h2>
-                <p>
-                  {reactStringReplace(description, /(#\w+)/g, (match, i) => (
-                    <LinkIds
-                      to={`/hashtag/${match.slice(1)}`}
-                      key={i}
-                      onClick={() => handleLinkClick(match)}
-                      style={{ color: '#FFFFFF' }}
-                    >
-                      {match}
-                    </LinkIds>
-                  ))}
-                </p>
-                <Articles>
-                  {url}
-                </Articles>
-              </InfoRight>
-            </Posts>
-          ))}
+          <ListPosts listPosts={listPosts} />
         </Main>
         <SideBar>
           <Sidebar />

@@ -19,7 +19,7 @@ export default function useLogout(boolean) {
       },
     };
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/signout/${userId}`, {}, config);
+      await axios.post(`${process.env.REACT_APP_API_URL}/signout`, {}, config);
     } catch (error) {
       console.error(error);
     } finally {

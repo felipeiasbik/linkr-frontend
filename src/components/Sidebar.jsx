@@ -35,7 +35,7 @@ export default function Sidebar() {
       <h2>trending</h2>
       <TagsContanier>
         {hashtags?.map(({ tag }) => (
-          <LinkIds to={`/hashtag/${tag.replace('#', '')}`}>
+          <LinkIds key={tag} to={`/hashtag/${tag.replace('#', '')}`}>
             <Tags data-test="hashtag" key={tag}>
               #
               {' '}
