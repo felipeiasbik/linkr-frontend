@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import colors from '../constants/colors.js';
-import fonts from '../constants/fonts.js';
+import colors from '../../constants/colors.js';
+import fonts from '../../constants/fonts.js';
 
 export const SidePageLogoContainer = styled.div`
   position: fixed;

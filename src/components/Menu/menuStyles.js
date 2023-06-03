@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import {
   Box, styled as muiStyled,
 } from '@mui/material';
-import colors from '../constants/colors.js';
-import fonts from '../constants/fonts.js';
+import colors from '../../constants/colors.js';
+import fonts from '../../constants/fonts.js';
 
 export const ModalBox = muiStyled(Box)(() => ({
   opacity: 1,

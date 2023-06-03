@@ -6,11 +6,11 @@ import { DebounceInput } from 'react-debounce-input';
 import { useNavigate } from 'react-router-dom';
 import {
   ContentSearch, SearchInput, ResultsContainer, SearchIcon,
-} from '../styles/searchStyles.js';
-import { UserContext } from '../context/userContext.jsx';
+} from './searchStyles.js';
+import { UserContext } from '../../context/userContext.jsx';
 import { SearchResult } from './SearchResult.jsx';
 
-export function Searchinput() {
+export default function Searchinput() {
   const navigate = useNavigate();
   const [viewWindow, setViewWindow] = useState(window.innerWidth);
   const [searchResults, setSearchResults] = useState([]);
@@ -38,7 +38,7 @@ export function Searchinput() {
       navigate('/');
     } else {
       const config = {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { userId: userData.id, Authorization: `Bearer ${token}` },
       };
 
       axios.get(`${process.env.REACT_APP_API_URL}/search?name=${searchTerm}`, config)

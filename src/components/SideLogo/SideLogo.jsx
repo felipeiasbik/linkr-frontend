@@ -3,7 +3,7 @@ import {
   Logo,
   LogoTitle,
   LogoMessage,
-} from '../styles/sideLogo.js';
+} from './sideLogoStyle.js';
 
 export default function SideLogo() {
   return (

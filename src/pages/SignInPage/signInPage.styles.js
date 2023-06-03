@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
-import fonts from '../constants/fonts.js';
-import colors from '../constants/colors.js';
+import fonts from '../../constants/fonts.js';
+import colors from '../../constants/colors.js';
 
 const fadeIn = keyframes`
   from {

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   HeaderContainer,
@@ -7,10 +7,10 @@ import {
   MenuButton,
   UserImg,
   ArrowDown,
-} from '../styles/headerStyles.js';
-import { UserContext } from '../context/userContext.jsx';
-import Menu from './Menu.jsx';
-import { Searchinput } from './Search.jsx';
+} from './headerStyles.js';
+import Searchinput from '../Search/Search.jsx';
+import { UserContext } from '../../context/userContext.jsx';
+import Menu from '../Menu/Menu.jsx';
 
 export default function Header() {
   const { userData } = useContext(UserContext);

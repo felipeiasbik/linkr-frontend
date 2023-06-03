@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
-import fonts from '../constants/fonts.js';
-import colors from '../constants/colors.js';
+import fonts from '../../constants/fonts.js';
+import colors from '../../constants/colors.js';
 
 export const LinkIds = styled(Link)`
     display: flex;

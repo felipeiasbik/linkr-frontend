@@ -2,12 +2,12 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Sidebar from '../components/Sidebar/Sidebar.jsx';
+import { ListPosts } from './PostsList/PostsList.jsx';
+import Sidebar from '../../components/Sidebar/Sidebar.jsx';
 import {
   Container, Title, SubContainer, Main, SideBar,
-} from './HashtagPage/hashtagStyles.js';
-import { ListPosts } from './HashtagPage/PostsList/PostsList.jsx';
-import { UserContext } from '../context/userContext.jsx';
+} from './hashtagStyles.js';
+import { UserContext } from '../../context/userContext.jsx';
 
 export default function HashtagPage() {
   const { hashtag } = useParams();

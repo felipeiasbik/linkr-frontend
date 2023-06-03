@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { IoIosArrowDown } from 'react-icons/io';
-import fonts from '../constants/fonts.js';
-import colors from '../constants/colors.js';
+import fonts from '../../constants/fonts.js';
+import colors from '../../constants/colors.js';
 
 export const HeaderContainer = styled.div`
   display: flex;

@@ -10,8 +10,8 @@ import {
   Input,
   SignUpButton,
   SwitchButton,
-} from '../styles/signUpPage.styles.js';
-import SideLogo from '../components/SideLogo.jsx';
+} from './signUpPage.styles.js';
+import SideLogo from '../../components/SideLogo/SideLogo.jsx';
 
 export default function SignUpPage() {
   const { register, handleSubmit } = useForm();

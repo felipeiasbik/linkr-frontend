@@ -1,6 +1,6 @@
 import {
   LinkIds, ResultItem, ResultImage, ResultName,
-} from '../styles/searchStyles.js';
+} from './searchStyles.js';
 
 export function SearchResult({ searchResults }) {
   return (

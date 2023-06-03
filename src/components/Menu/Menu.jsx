@@ -1,6 +1,6 @@
 import { Modal } from '@mui/material';
-import { ModalBox, LogoutButton } from '../styles/menuStyles.js';
-import useLogout from '../hooks/useLogout.js';
+import { ModalBox, LogoutButton } from './menuStyles.js';
+import useLogout from '../../hooks/useLogout.js';
 
 export default function Menu({ openModal, setOpenModal }) {
   const { handleLogout: setLogout } = useLogout();

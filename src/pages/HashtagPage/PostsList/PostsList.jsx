@@ -2,7 +2,7 @@ import reactStringReplace from 'react-string-replace';
 import { useState } from 'react';
 import {
   LinkIds, Posts, InfoLeft, InfoRight, Articles,
-} from '../styles/hashtagStyles.js';
+} from '../hashtagStyles.js';
 
 export function ListPosts({ listPosts }) {
   const [clickedLink, setClickedLink] = useState('');
