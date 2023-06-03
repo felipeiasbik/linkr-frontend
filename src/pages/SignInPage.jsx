@@ -65,7 +65,6 @@ export default function SignInPage() {
       }
 
       if (error?.response.status === 404) return alert(error.response.data.message);
-      console.error(error);
       return alert('There was an unexpected error!');
     }
   }
