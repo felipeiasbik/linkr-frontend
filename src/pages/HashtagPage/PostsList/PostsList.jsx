@@ -9,7 +9,6 @@ export function ListPosts({ listPosts }) {
   const handleLinkClick = (clickedHashtag) => {
     setClickedLink(clickedHashtag);
   };
-  console.log(listPosts);
   return (
     <div>
       {listPosts?.map(({

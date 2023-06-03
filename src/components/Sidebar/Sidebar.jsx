@@ -14,7 +14,7 @@ export default function Sidebar() {
   const { userData } = useContext(UserContext);
 
   useEffect(() => {
-    const token = localStorage.getItem('linkr_token');
+    const token = JSON.parse(localStorage.getItem('linkr_token'));
     if (!token) {
       navigate('/');
     } else {
