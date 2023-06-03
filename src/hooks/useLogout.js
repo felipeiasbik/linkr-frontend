@@ -16,6 +16,7 @@ export default function useLogout(boolean) {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
+        userId,
       },
     };
     try {
