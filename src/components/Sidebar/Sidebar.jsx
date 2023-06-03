@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ListTags, Tags, TagsContanier, LinkIds,
-} from '../styles/sidebarStyles.js';
+} from './sidebarStyles.js';
 
 export default function Sidebar() {
   const navigate = useNavigate();

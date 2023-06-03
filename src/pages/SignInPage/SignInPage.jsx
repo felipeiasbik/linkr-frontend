@@ -5,15 +5,16 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
-import SideLogo from '../components/SideLogo.jsx';
+import SideLogo from '../../components/SideLogo/SideLogo.jsx';
+
 import {
   SignInContainer,
   SignInForm,
   Input,
   SignInButton,
   SwitchButton,
-} from '../styles/signInPage.styles.js';
-import { UserContext } from '../context/userContext.jsx';
+} from './signInPage.styles.js';
+import { UserContext } from '../../context/userContext.jsx';
 
 export default function SignInPage() {
   const { register, handleSubmit } = useForm();

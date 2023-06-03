@@ -3,10 +3,10 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import reactStringReplace from 'react-string-replace';
-import Sidebar from '../components/Sidebar.jsx';
+import Sidebar from '../../components/Sidebar/Sidebar.jsx';
 import {
   LinkIds, Container, Title, SubContainer, Main, SideBar, Posts, InfoLeft, InfoRight, Articles,
-} from '../styles/hashtagStyles.js';
+} from './hashtagStyles.js';
 
 export default function HashtagPage() {
   const { hashtag } = useParams();

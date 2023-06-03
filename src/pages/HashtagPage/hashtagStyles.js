@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import colors from '../constants/colors.js';
-import fonts from '../constants/fonts.js';
+import colors from '../../constants/colors.js';
+import fonts from '../../constants/fonts.js';
 
 export const LinkIds = styled(Link)`
     text-decoration: none;

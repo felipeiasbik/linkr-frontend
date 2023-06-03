@@ -9,9 +9,9 @@ import {
   UserImg,
   ArrowDown,
   SearchIcon,
-} from '../styles/headerStyles.js';
-import { UserContext } from '../context/userContext.jsx';
-import Menu from './Menu.jsx';
+} from './headerStyles.js';
+import { UserContext } from '../../context/userContext.jsx';
+import Menu from '../Menu/Menu.jsx';
 
 export default function Header() {
   const { userData } = useContext(UserContext);
