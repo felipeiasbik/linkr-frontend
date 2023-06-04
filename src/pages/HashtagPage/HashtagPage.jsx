@@ -14,6 +14,7 @@ export default function HashtagPage() {
   const { hashtag } = useParams();
   const [listPosts, setListPosts] = useState([]);
   const { userData } = useContext(UserContext);
+  console.log(listPosts);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('linkr_token'));

@@ -1,7 +1,10 @@
+/* eslint-disable jsx-quotes */
 import reactStringReplace from 'react-string-replace';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import axios from 'axios';
 import { useContext, useState } from 'react';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 import {
   LinkIds, Posts, InfoLeft, InfoRight, Articles,
 } from './postContainerStyle.js';
@@ -17,21 +20,49 @@ export default function PostContainer({ item, handleLinkClick }) {
     created_at: createdAt,
     userLikedPost,
     likeCount,
+    likedUsers,
   } = item;
   const { userData } = useContext(UserContext);
   const token = JSON.parse(localStorage.getItem('linkr_token'));
   const [liked, setLiked] = useState(userLikedPost);
   const [likes, setLikes] = useState(likeCount);
+  const [usersLiked, setUsersLiked] = useState(likedUsers);
   const [waiting, setWaiting] = useState(false);
+
+  function buildTip(users) {
+    if (!users) return 'Ninguém curtiu';
+    if (!liked) {
+      const user = users.find((u) => u === userData.name);
+      if (user) {
+        const user2 = users.find((u) => u !== userData.name);
+        const info = [];
+        info.push('Você');
+        info.push(user2);
+        return `${info.join(', ')}`;
+      }
+      const info = users.slice(-2);
+      return `${info.join(', ')}`;
+    }
+    const user = users.find((u) => u !== userData.name);
+    const info = [];
+    info.push('Você');
+    info.push(user);
+    return `${info.join(', ')}`;
+  }
+  const [likesInfo, setLikesInfo] = useState(buildTip(usersLiked));
 
   function likePost(id) {
     const config = {
       headers: { userId: userData.id, Authorization: `Bearer ${token}` },
     };
     if (!waiting) {
+      const users = [...usersLiked];
+      users.push(userData.name);
+      setUsersLiked(users);
       setWaiting(true);
       setLiked(true);
       setLikes(Number(likes) + 1);
+      setLikesInfo(buildTip(users));
       axios.post(`${process.env.REACT_APP_API_URL}/likes/posts/${id}`, {}, config)
         .then(() => {
           alert('curtido');
@@ -51,9 +82,12 @@ export default function PostContainer({ item, handleLinkClick }) {
       headers: { userId: userData.id, Authorization: `Bearer ${token}` },
     };
     if (!waiting) {
+      const users = usersLiked.filter((u) => u !== userData.name);
+      setUsersLiked(users);
       setWaiting(true);
       setLiked(false);
       setLikes(Number(likes) - 1);
+      setLikesInfo(buildTip(users));
       axios.delete(`${process.env.REACT_APP_API_URL}/likes/posts/${id}`, config)
         .then(() => {
           alert('descurtido');
@@ -76,13 +110,23 @@ export default function PostContainer({ item, handleLinkClick }) {
             ? <AiFillHeart onClick={() => unlikePost(postId)} />
             : <AiOutlineHeart onClick={() => likePost(postId)} />
         }
-        <p>
+        <p
+          data-tooltip-id="my-tooltip"
+          data-tooltip-content={
+            likes > 2
+              ? `${likesInfo} e outras ${likes - 2}`
+              : `${likesInfo.replace(',', ' e')}`
+          }
+          data-tooltip-place='bottom'
+          data-tooltip-variant='light'
+        >
           {
             (likes !== 1)
               ? `${likes} likes`
-              : `${likes} likes`
+              : `${likes} like`
           }
         </p>
+        <Tooltip id="my-tooltip" />
       </InfoLeft>
       <InfoRight>
         <h2>{name}</h2>
