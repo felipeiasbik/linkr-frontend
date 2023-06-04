@@ -14,6 +14,7 @@ export const HeaderContainer = styled.div`
   padding: 7px 7px 7px 21px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   z-index: 1;
+  top: 0;
 `;
 
 export const SearchBarContainer = styled.div`

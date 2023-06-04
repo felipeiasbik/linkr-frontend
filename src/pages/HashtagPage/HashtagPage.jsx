@@ -12,15 +12,12 @@ import Header from '../../components/Header/Header.jsx';
 
 export default function HashtagPage() {
   const { hashtag } = useParams();
-  const navigate = useNavigate();
   const [listPosts, setListPosts] = useState([]);
   const { userData } = useContext(UserContext);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('linkr_token'));
-    if (!token) {
-      navigate('/');
-    } else {
+    if (userData) {
       const config = {
         headers: { userId: userData.id, Authorization: `Bearer ${token}` },
       };

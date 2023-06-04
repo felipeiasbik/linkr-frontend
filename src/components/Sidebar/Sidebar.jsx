@@ -9,15 +9,12 @@ import {
 import { UserContext } from '../../context/userContext.jsx';
 
 export default function Sidebar() {
-  const navigate = useNavigate();
   const [hashtags, setHashtags] = useState();
   const { userData } = useContext(UserContext);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('linkr_token'));
-    if (!token) {
-      navigate('/');
-    } else {
+    if (userData) {
       const config = {
         headers: { userId: userData.id, Authorization: `Bearer ${token}` },
       };
@@ -27,7 +24,7 @@ export default function Sidebar() {
           setHashtags(trendings);
         })
         .catch((err) => {
-          alert(err.response.data);
+          alert(err.response.data.message);
         });
     }
   }, []);
