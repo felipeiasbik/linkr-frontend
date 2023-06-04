@@ -8,6 +8,7 @@ import {
   Container, Title, SubContainer, Main, SideBar,
 } from './hashtagStyles.js';
 import { UserContext } from '../../context/userContext.jsx';
+import Header from '../../components/Header/Header.jsx';
 
 export default function HashtagPage() {
   const { hashtag } = useParams();
@@ -35,20 +36,24 @@ export default function HashtagPage() {
   }, [hashtag]);
 
   return (
-    <Container>
-      <Title data-test="hashtag-title">
-        #
-        {' '}
-        {hashtag}
-      </Title>
-      <SubContainer>
-        <Main>
-          <ListPosts listPosts={listPosts} />
-        </Main>
-        <SideBar>
-          <Sidebar />
-        </SideBar>
-      </SubContainer>
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <Title data-test="hashtag-title">
+          #
+          {' '}
+          {hashtag}
+        </Title>
+        <SubContainer>
+          <Main>
+            <ListPosts listPosts={listPosts} />
+          </Main>
+          <SideBar>
+            <Sidebar />
+          </SideBar>
+        </SubContainer>
+      </Container>
+    </>
+
   );
 }

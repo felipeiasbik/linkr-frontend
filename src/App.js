@@ -6,10 +6,8 @@ import GlobalStyles from './styles/globalStyles.js';
 import SignInPage from './pages/SignInPage/SignInPage.jsx';
 import TimelinePage from './pages/TimelinePage/TimelinePage.jsx';
 import HashtagPage from './pages/HashtagPage/HashtagPage.jsx';
-import Header from './components/Header/Header.jsx';
 import { UserContext } from './context/userContext.jsx';
 import { MainContainer } from './styles/appStyles.js';
-import SideLogo from './components/SideLogo/SideLogo.jsx';
 
 function App() {
   const { userData } = useContext(UserContext);
@@ -19,7 +17,6 @@ function App() {
 
       <ResetStyles />
       <GlobalStyles />
-      {userData ? <Header /> : <SideLogo />}
       <MainContainer logged={userData}>
         <Routes>
           <Route path="/" element={<SignInPage />} />

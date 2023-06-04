@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   HeaderContainer,
@@ -21,6 +21,15 @@ export default function Header() {
     setOpenModal(true);
   }
 
+  useEffect(() => {
+    if (!userData) {
+      navigate('/');
+      setTimeout(() => {
+        alert('Make login!');
+      }, 500);
+    }
+  }, []);
+
   return (
     <HeaderContainer>
       <HeaderLogo onClick={() => navigate('/timeline')}>linkr</HeaderLogo>
@@ -29,7 +38,7 @@ export default function Header() {
       </SearchBar>
       <MenuButton type="button" onClick={openOptions}>
         <ArrowDown open={openModal} />
-        <UserImg src={userData.photo} data-test="avatar" />
+        <UserImg src={userData?.photo} data-test="avatar" />
       </MenuButton>
       <Menu
         openModal={openModal}

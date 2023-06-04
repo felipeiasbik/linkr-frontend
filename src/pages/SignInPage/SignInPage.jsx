@@ -14,6 +14,7 @@ import {
   SwitchButton,
 } from './signInPage.styles.js';
 import { UserContext } from '../../context/userContext.jsx';
+import SideLogo from '../../components/SideLogo/SideLogo.jsx';
 
 export default function SignInPage() {
   const { register, handleSubmit } = useForm();
@@ -53,6 +54,7 @@ export default function SignInPage() {
         id,
         name,
         photo,
+        token: response.data.token,
       });
       setDisabled(false);
       return navigate('/timeline');
@@ -69,26 +71,29 @@ export default function SignInPage() {
     }
   }
   return (
-    <SignInContainer>
-      <SignInForm onSubmit={handleSubmit(submitForm)}>
+    <>
+      <SideLogo />
+      <SignInContainer>
+        <SignInForm onSubmit={handleSubmit(submitForm)}>
 
-        <Input
-          type="text"
-          placeholder="e-mail"
-          disabled={disabled}
-          {...register('email')}
-          data-test="email"
-        />
-        <Input
-          type="password"
-          placeholder="password"
-          disabled={disabled}
-          {...register('password')}
-          data-test="password"
-        />
-        <SignInButton disabled={disabled} data-test="login-btn">Log In</SignInButton>
-        <SwitchButton disabled={disabled} onClick={() => navigate('/sign-up')} type="button" data-test="sign-up-link">First time? Create an account!</SwitchButton>
-      </SignInForm>
-    </SignInContainer>
+          <Input
+            type="text"
+            placeholder="e-mail"
+            disabled={disabled}
+            {...register('email')}
+            data-test="email"
+          />
+          <Input
+            type="password"
+            placeholder="password"
+            disabled={disabled}
+            {...register('password')}
+            data-test="password"
+          />
+          <SignInButton disabled={disabled} data-test="login-btn">Log In</SignInButton>
+          <SwitchButton disabled={disabled} onClick={() => navigate('/sign-up')} type="button" data-test="sign-up-link">First time? Create an account!</SwitchButton>
+        </SignInForm>
+      </SignInContainer>
+    </>
   );
 }
