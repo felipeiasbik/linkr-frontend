@@ -34,9 +34,7 @@ export default function Searchinput() {
       return;
     }
     const token = JSON.parse(localStorage.getItem('linkr_token'));
-    if (!token) {
-      navigate('/');
-    } else {
+    if (userData) {
       const config = {
         headers: { userId: userData.id, Authorization: `Bearer ${token}` },
       };
