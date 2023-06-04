@@ -24,11 +24,15 @@ export function UserProvider({ children }) {
         id,
         name,
         photo,
+        token,
       });
     }
   }
 
   useEffect(() => {
+    if (userData?.token) {
+      return;
+    }
     handleUserData();
   }, []);
 

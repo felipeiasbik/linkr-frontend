@@ -47,40 +47,43 @@ export default function SignUpPage() {
     }
   }
   return (
-    <SignUpContainer>
-      <SignUpForm onSubmit={handleSubmit(submitForm)}>
+    <>
+      <SideLogo />
+      <SignUpContainer>
+        <SignUpForm onSubmit={handleSubmit(submitForm)}>
 
-        <Input
-          type="text"
-          placeholder="e-mail"
-          disabled={disabled}
-          {...register('email')}
-          data-test="email"
-        />
-        <Input
-          type="password"
-          placeholder="password"
-          disabled={disabled}
-          {...register('password')}
-          data-test="password"
-        />
-        <Input
-          type="text"
-          placeholder="username"
-          disabled={disabled}
-          {...register('name')}
-          data-test="username"
-        />
-        <Input
-          type="text"
-          placeholder="photo"
-          disabled={disabled}
-          {...register('photo')}
-          data-test="picture-url"
-        />
-        <SignUpButton disabled={disabled} data-test="sign-up-btn">Sign Up</SignUpButton>
-        <SwitchButton disabled={disabled} onClick={() => navigate('/')} type="button" data-test="login-link">Switch back to log in</SwitchButton>
-      </SignUpForm>
-    </SignUpContainer>
+          <Input
+            type="text"
+            placeholder="e-mail"
+            disabled={disabled}
+            {...register('email')}
+            data-test="email"
+          />
+          <Input
+            type="password"
+            placeholder="password"
+            disabled={disabled}
+            {...register('password')}
+            data-test="password"
+          />
+          <Input
+            type="text"
+            placeholder="username"
+            disabled={disabled}
+            {...register('name')}
+            data-test="username"
+          />
+          <Input
+            type="text"
+            placeholder="photo"
+            disabled={disabled}
+            {...register('photo')}
+            data-test="picture-url"
+          />
+          <SignUpButton disabled={disabled} data-test="sign-up-btn">Sign Up</SignUpButton>
+          <SwitchButton disabled={disabled} onClick={() => navigate('/')} type="button" data-test="login-link">Switch back to log in</SwitchButton>
+        </SignUpForm>
+      </SignUpContainer>
+    </>
   );
 }
