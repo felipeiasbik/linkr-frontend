@@ -4,7 +4,10 @@ import jwtDecode from 'jwt-decode';
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(() => {
+    const token = JSON.parse(localStorage.getItem('linkr_token'));
+    return token ? jwtDecode(token) : null;
+  });
 
   function handleUserData() {
     const token = localStorage.getItem('linkr_token');

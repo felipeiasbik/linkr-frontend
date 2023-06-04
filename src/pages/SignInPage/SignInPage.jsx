@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
-import SideLogo from '../../components/SideLogo/SideLogo.jsx';
 
 import {
   SignInContainer,
