@@ -10,6 +10,10 @@ export const CreatePost = styled.div`
   border-radius: 16px;
   margin-bottom: 29px;
   display: flex;
+  @media (max-width: 768px){ 
+  border-radius: 0px;
+  padding-right: 20px;
+  }
 `;
 export const UserImage = styled.div`
   width: 54px;
@@ -52,6 +56,7 @@ export const FormContainer = styled.div`
   }
 
   input {
+    margin-top:-10px;
     margin-bottom: 5px;
     height: 30px;
   }
@@ -59,6 +64,9 @@ export const FormContainer = styled.div`
   textarea {
     height: 66px;
     resize: none;
+    @media (max-width: 768px){     
+    height: 47px;
+    }
   }
 
   button {
@@ -75,6 +83,9 @@ export const FormContainer = styled.div`
     line-height: 17px;
     position: absolute;
     right: 0;
-    bottom: 5px;
+    bottom: 18px;
+    @media (max-width: 768px){     
+    height: 22px;
+    }
   }
 `;

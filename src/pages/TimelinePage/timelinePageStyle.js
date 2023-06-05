@@ -15,7 +15,10 @@ export const Title = styled.h2`
   color: ${colors.neutral};
   font-size: 43px;
   margin-bottom: 43px;
-  margin-top: 15px;
+  margin-top: 30px;
+  @media (max-width: 768px){ 
+  padding-left: 20px;
+  }
 `;
 export const Content = styled.div`
   display: flex;
