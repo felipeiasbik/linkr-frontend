@@ -10,7 +10,7 @@ import {
 } from './timelinePageStyle.js';
 
 export default function TimelinePage() {
-  const [postList, setListPost] = useState(null);
+  const [postList, setPostList] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isLoading, setIsLoading] = useState(false);
   const { userData } = useContext(UserContext);
@@ -28,7 +28,8 @@ export default function TimelinePage() {
       (async () => {
         try {
           const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
-          setListPost(data);
+          setPostList(data);
+          console.log('temo aki');
         } catch (err) {
           console.log(err?.response?.data);
         } finally {
@@ -37,7 +38,6 @@ export default function TimelinePage() {
       })();
     }
   }, []);
-
   useEffect(() => {
     const handleSize = () => {
       setWindowWidth(window.innerWidth > 768);
@@ -49,7 +49,6 @@ export default function TimelinePage() {
     };
   }, []);
 
-  console.log(postList);
   return (
     <>
       <Header />

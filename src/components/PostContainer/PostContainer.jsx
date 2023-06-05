@@ -4,6 +4,7 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import axios from 'axios';
 import { useContext, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
+import { Link } from 'react-router-dom';
 import 'react-tooltip/dist/react-tooltip.css';
 import {
   LinkIds, Posts, InfoLeft, InfoRight, Articles,
@@ -129,7 +130,13 @@ export default function PostContainer({ item, handleLinkClick }) {
         <Tooltip id="my-tooltip" />
       </InfoLeft>
       <InfoRight>
-        <h2>{name}</h2>
+        <div>
+          <h2>
+            <Link to={`/user/${item.user_id}`}>
+              {name}
+            </Link>
+          </h2>
+        </div>
         <p>
           {reactStringReplace(description, /(#\w+)/g, (match, i) => (
             <LinkIds
