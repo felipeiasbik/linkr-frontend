@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import axios from 'axios';
 import { useRef, useState } from 'react';
 import { FormContainer, CreatePost, UserImage } from './formAreaStyle';

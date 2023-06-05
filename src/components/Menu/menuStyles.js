@@ -1,23 +1,38 @@
-import styled from 'styled-components';
-import {
-  Box, styled as muiStyled,
-} from '@mui/material';
+import styled, { keyframes } from 'styled-components';
+import ReactModal from 'react-modal';
 import colors from '../../constants/colors.js';
 import fonts from '../../constants/fonts.js';
 
-export const ModalBox = muiStyled(Box)(() => ({
-  opacity: 1,
-  width: '180px',
-  borderRadius: '0  0  0 20px',
-  padding: '10px',
-  backgroundColor: colors.modal,
-  position: 'absolute',
-  right: 0,
-  top: '72px',
-  height: '47px',
-  transition: 'all .5s',
-  textAlign: 'center',
-}));
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+export const ModalBox = styled(ReactModal)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const MenuContainer = styled.div`
+  animation: ${fadeIn} .5s ease-in;
+  height: 47px;
+  width: 180px;
+  background-color: blue;
+  position: fixed;
+  right: 0;
+  top: 72px;
+  border-radius: 0  0  0 20px;
+  background-color: ${colors.modal};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+`;
 
 export const LogoutButton = styled.button`
   background-color: transparent;
@@ -29,4 +44,8 @@ export const LogoutButton = styled.button`
   line-height: 18px;
   letter-spacing: 0.05em;
   border: none;
+  cursor: pointer;
+  &:hover{
+    color: lightgray;
+  }
 `;
