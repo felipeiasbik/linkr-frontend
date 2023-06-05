@@ -20,6 +20,7 @@ display: flex;
 flex-direction: column;
 align-items: flex-start;
 margin: 0 auto;
+
 @media (max-width: 768px){
 padding-top: 10px;
 width: 100%;
@@ -33,6 +34,7 @@ font-weight: 700;
 display: flex;
 justify-content: flex-start;
 padding-bottom: 41px;
+
 @media (max-width: 768px){
 padding: 0 0 30px 20px;
   }

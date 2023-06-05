@@ -69,7 +69,7 @@ margin-bottom: 16px;
   }
 `;
 export const InfoLeft = styled.div`
-width: 76px;
+width: 70px;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -128,7 +128,7 @@ color: ${colors.description};
 `;
 export const Articles = styled.div`
 margin-top: 7px;
-width: 503px;
+width: 490px;
 height: 155px;
 border: 1px solid #4D4D4D;
 border-radius: 11px;

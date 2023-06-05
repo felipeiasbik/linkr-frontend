@@ -21,23 +21,12 @@ export const Content = styled.div`
 `;
 export const PostsArea = styled.div`
   width: 611px;
-  background-color: blue;
-  margin-right: 25px;
-`;
-export const CreatePost = styled.div`
-  width: 100%;
-  height: 209px;
-  background-color: ${colors.neutral};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 16px;
-  margin-bottom: 29px;
-`;
-export const Timeline = styled.div`
+  margin-right: ${({ margin }) => margin && '25px'};
 
+  @media (max-width: 768px){
+    width: 100%;
+  }
 `;
-/* PostContainer */
-export const PostContainer = styled.div`
-  width: 100%;
-  height: 276px;
-  background-color: ${colors.modal};
+
+export const Timeline = styled.div`
 `;
