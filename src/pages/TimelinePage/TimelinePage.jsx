@@ -41,7 +41,14 @@ export default function TimelinePage() {
   }, [refresh]);
 
   useEffect(() => {
+    if (window.innerWidth > 768) {
+      setWindowWidth(true);
+    } else {
+      setWindowWidth(false);
+    }
+
     const handleSize = () => {
+      console.log(window.innerWidth);
       if (window.innerWidth > 768) {
         setWindowWidth(true);
       } else {
