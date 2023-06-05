@@ -59,6 +59,7 @@ export default function TimelinePage() {
       <Header />
       <Container>
         <Title>
+          <img alt={userInfo?.name} src={userInfo?.photo} />
           {userInfo && `${userInfo?.name} Post's` }
         </Title>
         <Content>
