@@ -31,22 +31,15 @@ export default function PostContainer({ item, handleLinkClick }) {
 
   function buildTip(users) {
     if (!users) return 'Ninguém curtiu';
-    if (!liked) {
-      const user = users.find((u) => u === userData.name);
-      if (user) {
-        const user2 = users.find((u) => u !== userData.name);
-        const info = [];
-        info.push('Você');
-        info.push(user2);
-        return `${info.join(', ')}`;
-      }
-      const info = users.slice(-2);
-      return `${info.join(', ')}`;
+    const user = users.find((u) => u === userData.name);
+    if (user) {
+      const user2 = users.find((u) => u !== userData.name);
+      const info = [];
+      info.push(user);
+      if (user2) info.push(user2);
+      return `${info.join(', ').replace(userData.name, 'Você')}`;
     }
-    const user = users.find((u) => u !== userData.name);
-    const info = [];
-    info.push('Você');
-    info.push(user);
+    const info = users.slice(-2);
     return `${info.join(', ')}`;
   }
   const [likesInfo, setLikesInfo] = useState(buildTip(usersLiked));
@@ -107,10 +100,11 @@ export default function PostContainer({ item, handleLinkClick }) {
         <img alt={name} src={photo} />
         {
           liked
-            ? <AiFillHeart onClick={() => unlikePost(postId)} />
-            : <AiOutlineHeart onClick={() => likePost(postId)} />
+            ? <AiFillHeart data-test="like-btn" onClick={() => unlikePost(postId)} />
+            : <AiOutlineHeart data-test="like-btn" onClick={() => likePost(postId)} />
         }
         <p
+          data-test="counter"
           data-tooltip-id="my-tooltip"
           data-tooltip-content={
             likes > 2
@@ -126,7 +120,7 @@ export default function PostContainer({ item, handleLinkClick }) {
               : `${likes} like`
           }
         </p>
-        <Tooltip id="my-tooltip" />
+        <Tooltip data-test="tooltip" id="my-tooltip" />
       </InfoLeft>
       <InfoRight>
         <h2>{name}</h2>
