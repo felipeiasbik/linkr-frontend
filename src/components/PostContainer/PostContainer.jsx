@@ -3,7 +3,7 @@ import {
   AiFillDelete, AiFillHeart, AiOutlineEdit, AiOutlineHeart,
 } from 'react-icons/ai';
 import axios from 'axios';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useRef, useEffect, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import { Link } from 'react-router-dom';
 import 'react-tooltip/dist/react-tooltip.css';
@@ -11,6 +11,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import {
   LinkIds, Posts, InfoLeft, InfoRight, Articles, IconsContainer,
   DeleteModal, ButtonContainer, BackButton, ConfirmButton,
+  MetaDataInfos, MetaDataImage,
 } from './postContainerStyle.js';
 import { UserContext } from '../../context/userContext.jsx';
 import EditDescription from '../EditDescription/EditDescription.jsx';
@@ -40,6 +41,23 @@ export default function PostContainer({
   const [modalOpen, setModalOpen] = useState(false);
   const [editDesc, setEditDesc] = useState(false);
   const [descState, setDescState] = useState(description);
+  const [metaData, setMetaData] = useState(null);
+
+  useEffect(() => {
+    axios.get(`https://jsonlink.io/api/extract?url=${url}`)
+      .then((res) => {
+        setMetaData({
+          title: res.data.title,
+          description: res.data.description,
+          images: res.data.images[0],
+          url,
+        });
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }, []);
+
   function buildTip(users) {
     if (!users) return 'Ninguém curtiu';
     const user = users.find((u) => u === userData.name);
@@ -188,7 +206,7 @@ export default function PostContainer({
       <InfoRight>
         <div>
           <h2>
-            <Link to={`/user/${item.user_id}`}>
+            <Link data-test="username" to={`/user/${item.user_id}`}>
               {name}
             </Link>
           </h2>
@@ -219,9 +237,16 @@ export default function PostContainer({
               />
             )
         }
-        <Articles>
-          {url}
-        </Articles>
+        <LinkIds to={url} target="_blank" data-test="link">
+          <Articles>
+            <MetaDataInfos>
+              <h2>{metaData?.title}</h2>
+              <p>{metaData?.description}</p>
+              <p>{metaData?.url}</p>
+            </MetaDataInfos>
+            <MetaDataImage><img alt="a" src={metaData?.images} /></MetaDataImage>
+          </Articles>
+        </LinkIds>
       </InfoRight>
     </Posts>
   );
