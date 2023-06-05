@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 import axios from 'axios';
 import { useRef, useState } from 'react';
 import { FormContainer, CreatePost, UserImage } from './formAreaStyle';
@@ -12,10 +11,17 @@ export default function CreatePostArea({ userData, refresh, setRefresh }) {
     setIsLoading(true);
     formRef.current.createdAt = Date.now();
 
-    if (!formRef.current.description) {
-      delete (formRef.current.description);
+    if (!formRef.current.url) {
+      setTimeout(() => {
+        setIsLoading(false);
+        alert('Enter a valid URL');
+      }, 500);
+      return;
     }
 
+    if (!formRef.current.description) {
+      delete formRef.current.description;
+    }
     const token = JSON.parse(localStorage.getItem('linkr_token'));
 
     const config = {
