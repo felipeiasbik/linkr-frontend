@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useContext } from 'react';
+import ReactModal from 'react-modal';
 import { UserContext } from './context/userContext.jsx';
 import { MainContainer } from './styles/appStyles.js';
 import SignUpPage from './pages/SignUpPage/SignUpPage.jsx';
@@ -9,6 +10,8 @@ import SignInPage from './pages/SignInPage/SignInPage.jsx';
 import TimelinePage from './pages/TimelinePage/TimelinePage.jsx';
 import UserPage from './pages/UserPage/UserPage.jsx';
 import HashtagPage from './pages/HashtagPage/HashtagPage.jsx';
+
+ReactModal.setAppElement('#root');
 
 function App() {
   const { userData } = useContext(UserContext);

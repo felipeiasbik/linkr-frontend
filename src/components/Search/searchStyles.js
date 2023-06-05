@@ -84,13 +84,19 @@ export const ResultItem = styled.div`
   display: flex;
   align-items: center;
   padding: 8px;
+  border-radius: 5px;
   cursor: pointer;
+  &:hover{
+    background-color: aliceblue;
+    transition: all .8s;
+  }
 `;
 export const ResultImage = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 50%;
   margin-right: 8px;
+  object-fit: cover;
 `;
 export const ResultName = styled.div`
   font-weight: 400;

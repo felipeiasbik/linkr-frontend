@@ -14,11 +14,17 @@ import Menu from '../Menu/Menu.jsx';
 
 export default function Header() {
   const { userData } = useContext(UserContext);
-  const [openModal, setOpenModal] = useState(false);
+  const [modalIsOpen, setOpenModal] = useState(false);
   const navigate = useNavigate();
 
-  function openOptions(e) {
-    setOpenModal(true);
+  function handleModal(e) {
+    const target = e.target.getAttribute('data-name');
+
+    if (!modalIsOpen && (target === 'avatar' || target === 'arrow')) {
+      return setOpenModal(true);
+    }
+
+    return setOpenModal(false);
   }
 
   useEffect(() => {
@@ -36,14 +42,13 @@ export default function Header() {
       <SearchBar>
         <Searchinput />
       </SearchBar>
-      <MenuButton type="button" onClick={openOptions}>
-        <ArrowDown open={openModal} />
-        <UserImg src={userData?.photo} data-test="avatar" />
+      <MenuButton type="button">
+        <ArrowDown open={modalIsOpen} data-name="arrow" onClick={handleModal} />
+        <UserImg src={userData?.photo} data-test="avatar" data-name="avatar" onClick={handleModal} />
       </MenuButton>
       <Menu
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-        data-test="menu"
+        modalIsOpen={modalIsOpen}
+        handleModal={handleModal}
       />
     </HeaderContainer>
   );
