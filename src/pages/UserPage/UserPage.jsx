@@ -59,7 +59,7 @@ export default function TimelinePage() {
       <Header />
       <Container>
         <Title>
-          {`${userInfo?.name} Post's` }
+          {userInfo && `${userInfo?.name} Post's` }
         </Title>
         <Content>
           <PostsArea margin={windowWidth}>

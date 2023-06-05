@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading, no-unused-vars, no-restricted-syntax */
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ListPosts } from './PostsList/PostsList.jsx';
 import Sidebar from '../../components/Sidebar/Sidebar.jsx';
 import {
@@ -14,7 +14,7 @@ export default function HashtagPage() {
   const { hashtag } = useParams();
   const [listPosts, setListPosts] = useState([]);
   const { userData } = useContext(UserContext);
-  console.log(listPosts);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('linkr_token'));
@@ -31,7 +31,7 @@ export default function HashtagPage() {
           alert(err.response.data);
         });
     }
-  }, [hashtag]);
+  }, [hashtag, refresh]);
 
   return (
     <>
@@ -44,7 +44,7 @@ export default function HashtagPage() {
         </Title>
         <SubContainer>
           <Main>
-            <ListPosts listPosts={listPosts} />
+            <ListPosts listPosts={listPosts} refresh={refresh} setRefresh={setRefresh} />
           </Main>
           <SideBar>
             <Sidebar />

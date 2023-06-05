@@ -58,6 +58,7 @@ export default function Searchinput() {
         type="text"
         placeholder={viewWindow <= 768 ? 'Search for people and friends' : 'Search for people'}
         onChange={handleSearch}
+        data-test="search"
       />
       {searchResults.length > 0 && (
         <ResultsContainer>

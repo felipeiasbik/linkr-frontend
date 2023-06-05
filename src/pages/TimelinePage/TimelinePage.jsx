@@ -14,6 +14,7 @@ export default function TimelinePage() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isLoading, setIsLoading] = useState(false);
   const { userData } = useContext(UserContext);
+  const [refresh, setRefresh] = useState();
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,7 +38,8 @@ export default function TimelinePage() {
         }
       })();
     }
-  }, []);
+  }, [refresh]);
+
   useEffect(() => {
     const handleSize = () => {
       setWindowWidth(window.innerWidth > 768);
@@ -56,7 +58,7 @@ export default function TimelinePage() {
         <Title>timeline</Title>
         <Content>
           <PostsArea margin={windowWidth}>
-            <CreatePostArea userData={userData} />
+            <CreatePostArea userData={userData} refresh={refresh} setRefresh={setRefresh} />
             <Timeline>
               {isLoading && (
                 <h3>
@@ -71,7 +73,12 @@ export default function TimelinePage() {
 
               {!isLoading && postList && postList.length > 0 && (
                 postList?.map((item) => (
-                  <PostContainer item={item} key={item.post_id} />
+                  <PostContainer
+                    item={item}
+                    key={item.post_id}
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
                 )))}
               {!isLoading && postList && postList.length === 0 && (
                 <h3>There are no posts yet</h3>
