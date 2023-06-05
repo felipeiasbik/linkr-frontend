@@ -158,7 +158,9 @@ export default function PostContainer({
         </ButtonContainer>
       </DeleteModal>
       <InfoLeft like={liked.toString()}>
-        <img alt={name} src={photo} />
+        <Link to={`/user/${item.user_id}`}>
+          <img alt={name} src={photo} />
+        </Link>
         {
           liked
             ? <AiFillHeart data-test="like-btn" onClick={() => unlikePost(postId)} />
