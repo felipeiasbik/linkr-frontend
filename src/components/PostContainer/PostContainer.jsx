@@ -4,7 +4,7 @@ import {
 } from 'react-icons/ai';
 import axios from 'axios';
 import {
-  useContext, useRef, useEffect, useState,
+  useContext, useEffect, useState,
 } from 'react';
 import { Tooltip } from 'react-tooltip';
 import { Link } from 'react-router-dom';
@@ -139,8 +139,8 @@ export default function PostContainer({
         setWaiting(false);
       });
   }
-  function editPost(id) {
-    setEditDesc(true);
+  function editPost() {
+    setEditDesc(!editDesc);
   }
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -152,7 +152,7 @@ export default function PostContainer({
   return (
     <Posts data-test="post">
       <IconsContainer userLogged={userData.id} owner={userId}>
-        <AiOutlineEdit data-test="edit-btn" onClick={() => editPost(postId)} />
+        <AiOutlineEdit data-test="edit-btn" onClick={editPost} />
         <AiFillDelete data-test="delete-btn" onClick={handleOpenModal} />
       </IconsContainer>
       <DeleteModal isOpen={modalOpen}>
