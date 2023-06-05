@@ -113,6 +113,8 @@ export default function PostContainer({
       })
       .catch((err) => {
         console.log(err);
+        alert('Oops, something went wrong. The post was not deleted.');
+        setModalOpen(false);
         setWaiting(false);
       });
   }
@@ -135,10 +137,10 @@ export default function PostContainer({
       <DeleteModal isOpen={modalOpen}>
         <p>Are you sure you want to delete this post?</p>
         <ButtonContainer>
-          <BackButton disabled={waiting} type="button" onClick={handleCloseModal}>
+          <BackButton data-test="cancel" disabled={waiting} type="button" onClick={handleCloseModal}>
             No, go back
           </BackButton>
-          <ConfirmButton disabled={waiting} type="button" onClick={() => deletePost(postId)}>
+          <ConfirmButton data-test="confirm" disabled={waiting} type="button" onClick={() => deletePost(postId)}>
             {waiting ? (
               <ThreeDots
                 height="20"
