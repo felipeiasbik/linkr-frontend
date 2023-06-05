@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useRef, useState } from 'react';
 import { FormContainer, CreatePost, UserImage } from './formAreaStyle';
 
-export default function CreatePostArea({ userData }) {
+export default function CreatePostArea({ userData, refresh, setRefresh }) {
   const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef({});
 
@@ -28,6 +28,7 @@ export default function CreatePostArea({ userData }) {
       alert('There was an error while publishing your link.');
     } finally {
       setIsLoading(false);
+      setRefresh(!refresh);
     }
   }
 
