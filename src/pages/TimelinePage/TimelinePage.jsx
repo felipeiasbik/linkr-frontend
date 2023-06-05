@@ -4,8 +4,9 @@ import { UserContext } from '../../context/userContext.jsx';
 import Header from '../../components/Header/Header.jsx';
 import Sidebar from '../../components/Sidebar/Sidebar.jsx';
 import PostContainer from '../../components/PostContainer/PostContainer.jsx';
+import CreatePostArea from './CreatePostArea/CreatePostArea.jsx';
 import {
-  Container, Title, Content, PostsArea, CreatePost, Timeline, UserImage, FormArea,
+  Container, Title, Content, PostsArea, Timeline,
 } from './timelinePageStyle.js';
 
 export default function TimelinePage() {
@@ -43,7 +44,7 @@ export default function TimelinePage() {
       window.removeEventListener('resize', handleSize);
     };
   }, []);
-  console.log('POSTLIST', postList);
+
   return (
     <>
       <Header />
@@ -51,14 +52,7 @@ export default function TimelinePage() {
         <Title>timeline</Title>
         <Content>
           <PostsArea margin={windowWidth}>
-            <CreatePost>
-              <UserImage>
-                <img alt={userData.name} src={userData.photo} />
-              </UserImage>
-              <FormArea>
-                ...
-              </FormArea>
-            </CreatePost>
+            <CreatePostArea userData={userData} />
             <Timeline>
               {postList?.map((item) => (
                 <PostContainer item={item} key={item.post_id} />
