@@ -1,4 +1,3 @@
-/* eslint-disable spaced-comment */
 import reactStringReplace from 'react-string-replace';
 import {
   AiFillDelete, AiFillHeart, AiOutlineEdit, AiOutlineHeart,
@@ -30,6 +29,7 @@ export default function PostContainer({
     likedUsers,
     user_id: userId,
   } = item;
+
   const { userData } = useContext(UserContext);
   const token = JSON.parse(localStorage.getItem('linkr_token'));
   const [liked, setLiked] = useState(userLikedPost);
