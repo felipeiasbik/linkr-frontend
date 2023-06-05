@@ -90,7 +90,7 @@ export default function TimelinePage() {
                   />
                 )))}
               {!isLoading && postList && postList.length === 0 && (
-                <h3>There are no posts yet</h3>
+                <h3 data-test="message">There are no posts yet</h3>
               )}
             </Timeline>
           </PostsArea>
