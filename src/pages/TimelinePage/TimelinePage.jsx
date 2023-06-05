@@ -43,7 +43,7 @@ export default function TimelinePage() {
       window.removeEventListener('resize', handleSize);
     };
   }, []);
-
+  console.log('POSTLIST', postList);
   return (
     <>
       <Header />
