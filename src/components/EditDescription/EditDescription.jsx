@@ -49,6 +49,7 @@ export default function EditDescription({
       {...register('edit')}
       disabled={waiting}
       onKeyDown={evento}
+      data-test="edit-input"
     />
   );
 }

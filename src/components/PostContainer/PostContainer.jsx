@@ -4,7 +4,7 @@ import {
 } from 'react-icons/ai';
 import axios from 'axios';
 import {
-  useContext, useRef, useEffect, useState,
+  useContext, useEffect, useState,
 } from 'react';
 import { Tooltip } from 'react-tooltip';
 import { Link } from 'react-router-dom';
@@ -88,7 +88,7 @@ export default function PostContainer({
       setLikesInfo(buildTip(users));
       axios.post(`${process.env.REACT_APP_API_URL}/likes/posts/${id}`, {}, config)
         .then(() => {
-          alert('curtido');
+          alert('Liked');
           setWaiting(false);
         })
         .catch((err) => {
@@ -111,7 +111,7 @@ export default function PostContainer({
       setLikesInfo(buildTip(users));
       axios.delete(`${process.env.REACT_APP_API_URL}/likes/posts/${id}`, config)
         .then(() => {
-          alert('descurtido');
+          alert('Disliked');
           setWaiting(false);
         })
         .catch((err) => {

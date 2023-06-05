@@ -10,7 +10,7 @@ export const CreatePost = styled.div`
   border-radius: 16px;
   margin-bottom: 29px;
   display: flex;
-  @media (max-width: 768px){ 
+  @media (max-width: 768px){
   border-radius: 0px;
   padding-right: 20px;
   }
@@ -64,7 +64,7 @@ export const FormContainer = styled.div`
   textarea {
     height: 66px;
     resize: none;
-    @media (max-width: 768px){     
+    @media (max-width: 768px){
     height: 47px;
     }
   }
@@ -84,7 +84,8 @@ export const FormContainer = styled.div`
     position: absolute;
     right: 0;
     bottom: 18px;
-    @media (max-width: 768px){     
+    cursor: pointer;
+    @media (max-width: 768px){
     height: 22px;
     }
   }
