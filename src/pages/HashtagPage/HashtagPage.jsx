@@ -14,6 +14,7 @@ export default function HashtagPage() {
   const { hashtag } = useParams();
   const [listPosts, setListPosts] = useState([]);
   const { userData } = useContext(UserContext);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('linkr_token'));
@@ -30,7 +31,7 @@ export default function HashtagPage() {
           alert(err.response.data);
         });
     }
-  }, [hashtag]);
+  }, [hashtag, refresh]);
 
   return (
     <>
@@ -43,7 +44,7 @@ export default function HashtagPage() {
         </Title>
         <SubContainer>
           <Main>
-            <ListPosts listPosts={listPosts} />
+            <ListPosts listPosts={listPosts} refresh={refresh} setRefresh={setRefresh} />
           </Main>
           <SideBar>
             <Sidebar />
