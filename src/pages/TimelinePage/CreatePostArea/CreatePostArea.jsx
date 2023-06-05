@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useRef, useState } from 'react';
-import { FormContainer, CreatePost, UserImage } from './formAreaStyle';
+import { FormContainer, CreatePost, UserImage } from './createPostArea.js';
 
 export default function CreatePostArea({ userData, refresh, setRefresh }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +40,7 @@ export default function CreatePostArea({ userData, refresh, setRefresh }) {
   }
 
   return (
-    <CreatePost>
+    <CreatePost data-test="publish-box">
       <UserImage>
         <img alt={userData.name} src={userData.photo} />
       </UserImage>
@@ -54,17 +54,20 @@ export default function CreatePostArea({ userData, refresh, setRefresh }) {
           onChange={(e) => formRef.current.url = e.target.value}
           value={formRef.current.url}
           disabled={isLoading}
+          data-test="link"
         />
         <textarea
           placeholder="Post description."
           onChange={(e) => formRef.current.description = e.target.value}
           value={formRef.current.description}
           disabled={isLoading}
+          data-test="description"
         />
         <button
           type="submit"
           onClick={handleSendPost}
           disabled={isLoading}
+          data-test="publish-btn"
         >
           {isLoading ? 'Publishing' : 'Publish'}
         </button>
