@@ -5,7 +5,7 @@ import { useState } from 'react';
 // } from '../hashtagStyles.js';
 import PostContainer from '../../../components/PostContainer/PostContainer.jsx';
 
-export function ListPosts({ listPosts }) {
+export function ListPosts({ listPosts, refresh, setRefresh }) {
   const [clickedLink, setClickedLink] = useState('');
   const handleLinkClick = (clickedHashtag) => {
     setClickedLink(clickedHashtag);
@@ -13,7 +13,13 @@ export function ListPosts({ listPosts }) {
   return (
     <div>
       {listPosts?.map((item) => (
-        <PostContainer item={item} handleLinkClick={handleLinkClick} key={item.post_id} />
+        <PostContainer
+          item={item}
+          handleLinkClick={handleLinkClick}
+          key={item.post_id}
+          refresh={refresh}
+          setRefresh={setRefresh}
+        />
       ))}
     </div>
   );
