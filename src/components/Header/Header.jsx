@@ -37,17 +37,16 @@ export default function Header() {
   }, []);
 
   return (
-    <HeaderContainer onClick={handleModal}>
+    <HeaderContainer>
       <HeaderLogo onClick={() => navigate('/timeline')}>linkr</HeaderLogo>
       <SearchBar>
         <Searchinput />
       </SearchBar>
-      <MenuButton type="button" onClick={handleModal}>
-        <ArrowDown open={modalIsOpen} data-name="arrow" />
-        <UserImg src={userData?.photo} data-test="avatar" data-name="avatar" />
+      <MenuButton type="button">
+        <ArrowDown open={modalIsOpen} data-name="arrow" onClick={handleModal} />
+        <UserImg src={userData?.photo} data-test="avatar" data-name="avatar" onClick={handleModal} />
       </MenuButton>
       <Menu
-        onClick={handleModal}
         modalIsOpen={modalIsOpen}
         handleModal={handleModal}
       />

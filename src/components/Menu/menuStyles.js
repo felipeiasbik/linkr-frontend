@@ -22,7 +22,6 @@ export const MenuContainer = styled.div`
   animation: ${fadeIn} .5s ease-in;
   height: 47px;
   width: 180px;
-  background-color: blue;
   position: fixed;
   right: 0;
   top: 72px;
