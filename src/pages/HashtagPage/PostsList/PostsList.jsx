@@ -1,8 +1,5 @@
-// import reactStringReplace from 'react-string-replace';
 import { useState } from 'react';
-// import {
-//   LinkIds, Posts, InfoLeft, InfoRight, Articles,
-// } from '../hashtagStyles.js';
+
 import PostContainer from '../../../components/PostContainer/PostContainer.jsx';
 
 export function ListPosts({ listPosts }) {

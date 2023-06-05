@@ -2,7 +2,6 @@
 
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   ListTags, Tags, TagsContanier, LinkIds,
 } from './sidebarStyles.js';

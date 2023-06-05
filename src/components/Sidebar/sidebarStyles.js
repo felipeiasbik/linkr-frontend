@@ -13,6 +13,7 @@ flex-direction: column;
 background-color: ${colors.modal};
 border-radius: 16px;
 width: 300px;
+height: 380px;
 color: #ffffff;
 font-weight: 700;
 h2 {
