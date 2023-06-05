@@ -1,4 +1,3 @@
-/* eslint-disable spaced-comment */
 import reactStringReplace from 'react-string-replace';
 import {
   AiFillDelete, AiFillHeart, AiOutlineEdit, AiOutlineHeart,
@@ -30,6 +29,7 @@ export default function PostContainer({
     likedUsers,
     user_id: userId,
   } = item;
+
   const { userData } = useContext(UserContext);
   const token = JSON.parse(localStorage.getItem('linkr_token'));
   const [liked, setLiked] = useState(userLikedPost);
@@ -158,7 +158,9 @@ export default function PostContainer({
         </ButtonContainer>
       </DeleteModal>
       <InfoLeft like={liked.toString()}>
-        <img alt={name} src={photo} />
+        <Link to={`/user/${item.user_id}`}>
+          <img alt={name} src={photo} />
+        </Link>
         {
           liked
             ? <AiFillHeart data-test="like-btn" onClick={() => unlikePost(postId)} />

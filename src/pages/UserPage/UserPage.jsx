@@ -12,7 +12,7 @@ import {
 export default function TimelinePage() {
   const [postList, setPostList] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { userData } = useContext(UserContext);
   const { id } = useParams();
@@ -44,7 +44,11 @@ export default function TimelinePage() {
 
   useEffect(() => {
     const handleSize = () => {
-      setWindowWidth(window.innerWidth > 768);
+      if (window.innerWidth > 768) {
+        setWindowWidth(true);
+      } else {
+        setWindowWidth(false);
+      }
     };
     window.addEventListener('resize', handleSize);
 
@@ -52,13 +56,13 @@ export default function TimelinePage() {
       window.removeEventListener('resize', handleSize);
     };
   }, []);
-
-  console.log(postList);
+  console.log(windowWidth);
   return (
     <>
       <Header />
       <Container>
         <Title>
+          {userInfo && <img alt={userInfo?.name} src={userInfo?.photo} />}
           {userInfo && `${userInfo?.name} Post's` }
         </Title>
         <Content>
@@ -84,7 +88,7 @@ export default function TimelinePage() {
               )}
             </Timeline>
           </PostsArea>
-          {windowWidth && <Sidebar />}
+          {(windowWidth) && <Sidebar />}
         </Content>
       </Container>
 

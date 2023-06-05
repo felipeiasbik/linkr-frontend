@@ -15,6 +15,7 @@ export const Title = styled.h2`
   color: ${colors.neutral};
   font-size: 43px;
   margin-bottom: 43px;
+  margin-top: 15px;
 `;
 export const Content = styled.div`
   display: flex;

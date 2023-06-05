@@ -14,7 +14,16 @@ export const Title = styled.div`
   font-family: ${fonts.secondary};
   color: ${colors.neutral};
   font-size: 43px;
-  margin-bottom: 43px;
+  margin-bottom: 25px;
+  margin-top: 15px;
+  display: flex;
+  img{
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+  }
 `;
 export const Content = styled.div`
   display: flex;
