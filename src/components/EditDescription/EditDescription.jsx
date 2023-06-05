@@ -38,7 +38,7 @@ export default function EditDescription({
       value={description}
       disabled={waiting}
       onKeyDown={evento}
-      onChange={(event) => setDescription(event.target.value)}
+      onChange={(e) => setDescription(e.target.value)}
       data-test="edit-input"
     />
   );
