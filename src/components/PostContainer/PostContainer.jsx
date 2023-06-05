@@ -69,7 +69,6 @@ export default function PostContainer({
           setWaiting(false);
         })
         .catch((err) => {
-          console.log(err);
           setWaiting(false);
           setLiked(false);
           setLikes(likes - 1);
@@ -93,7 +92,6 @@ export default function PostContainer({
           setWaiting(false);
         })
         .catch((err) => {
-          console.log(err);
           setWaiting(false);
           setLiked(true);
           setLikes(likes + 1);
@@ -113,7 +111,6 @@ export default function PostContainer({
         setRefresh(!refresh);
       })
       .catch((err) => {
-        console.log(err);
         alert('Oops, something went wrong. The post was not deleted.');
         setModalOpen(false);
         setWaiting(false);

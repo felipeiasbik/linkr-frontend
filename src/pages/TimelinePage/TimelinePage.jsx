@@ -30,7 +30,6 @@ export default function TimelinePage() {
         try {
           const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
           setPostList(data);
-          console.log('temo aki');
         } catch (err) {
           console.log(err?.response?.data);
         } finally {
@@ -48,7 +47,6 @@ export default function TimelinePage() {
     }
 
     const handleSize = () => {
-      console.log(window.innerWidth);
       if (window.innerWidth > 768) {
         setWindowWidth(true);
       } else {
