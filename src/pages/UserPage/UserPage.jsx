@@ -4,19 +4,16 @@ import { UserContext } from '../../context/userContext.jsx';
 import Header from '../../components/Header/Header.jsx';
 import Sidebar from '../../components/Sidebar/Sidebar.jsx';
 import PostContainer from '../../components/PostContainer/PostContainer.jsx';
-import CreatePostArea from './CreatePostArea/CreatePostArea.jsx';
 import {
   Container, Title, Content, PostsArea, Timeline,
-} from './timelinePageStyle.js';
+} from './userPageStyle';
 
 export default function TimelinePage() {
-  const [postList, setListPost] = useState(null);
+  const [postList, setListPost] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [isLoading, setIsLoading] = useState(false);
   const { userData } = useContext(UserContext);
 
   useEffect(() => {
-    setIsLoading(true);
     const token = JSON.parse(localStorage.getItem('linkr_token'));
     if (userData) {
       const config = {
@@ -27,12 +24,10 @@ export default function TimelinePage() {
       };
       (async () => {
         try {
-          const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
+          const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts/user/:id}`, config);
           setListPost(data);
         } catch (err) {
           console.log(err?.response?.data);
-        } finally {
-          setIsLoading(false);
         }
       })();
     }
@@ -57,26 +52,11 @@ export default function TimelinePage() {
         <Title>timeline</Title>
         <Content>
           <PostsArea margin={windowWidth}>
-            <CreatePostArea userData={userData} />
             <Timeline>
-              {isLoading && (
-                <h3>
-                  Loading posts...
-                </h3>
-              )}
-              {!postList && !isLoading && (
-              <h3>
-                An error occured while trying to fetch the posts, please refresh the page
-              </h3>
-              )}
-
-              {!isLoading && postList && postList.length > 0 && (
-                postList?.map((item) => (
-                  <PostContainer item={item} key={item.post_id} />
-                )))}
-              {!isLoading && postList && postList.length === 0 && (
-                <h3>There are no posts yet</h3>
-              )}
+              {postList?.map((item) => (
+                <PostContainer item={item} key={item.post_id} />
+              ))}
+              ...
             </Timeline>
           </PostsArea>
           {windowWidth && <Sidebar />}

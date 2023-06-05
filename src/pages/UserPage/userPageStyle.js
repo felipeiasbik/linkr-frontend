@@ -29,13 +29,4 @@ export const PostsArea = styled.div`
 `;
 
 export const Timeline = styled.div`
-  h3 {
-    width: 100%;
-    font-family: ${fonts.secondary};
-    color: ${colors.neutral};
-    font-size: 43px;
-    margin-bottom: 43px;
-    display: flex;
-    justify-content: center;
-  }
 `;

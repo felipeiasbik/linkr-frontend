@@ -1,28 +1,33 @@
 import axios from 'axios';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { FormContainer, CreatePost, UserImage } from './formAreaStyle';
 
 export default function CreatePostArea({ userData }) {
-  const formRef = useRef({
-    url: '',
-    description: '',
-    createdAt: '',
-  });
+  const [isLoading, setIsLoading] = useState(false);
+  const formRef = useRef({});
 
   async function handleSendPost(e) {
     e.preventDefault();
+    setIsLoading(true);
     formRef.current.createdAt = Date.now();
-    console.log(formRef.current);
+
+    if (!formRef.current.description) {
+      delete (formRef.current.description);
+    }
+
     const token = JSON.parse(localStorage.getItem('linkr_token'));
 
     const config = {
       headers: { userId: userData.id, Authorization: `Bearer ${token}` },
     };
     try {
-      const teste = await axios.post(`${process.env.REACT_APP_API_URL}/posts`, formRef.current, config);
-      console.log(teste);
+      await axios.post(`${process.env.REACT_APP_API_URL}/posts`, formRef.current, config);
+      formRef.current.url = '';
+      formRef.current.description = '';
     } catch (err) {
-      console.log(err.response.data);
+      alert('There was an error while publishing your link.');
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -39,16 +44,21 @@ export default function CreatePostArea({ userData }) {
           type="url"
           placeholder="Enter URL"
           onChange={(e) => formRef.current.url = e.target.value}
+          value={formRef.current.url}
+          disabled={isLoading}
         />
         <textarea
           placeholder="Post description."
           onChange={(e) => formRef.current.description = e.target.value}
+          value={formRef.current.description}
+          disabled={isLoading}
         />
         <button
           type="submit"
           onClick={handleSendPost}
+          disabled={isLoading}
         >
-          Publish
+          {isLoading ? 'Publishing' : 'Publish'}
         </button>
       </FormContainer>
     </CreatePost>
