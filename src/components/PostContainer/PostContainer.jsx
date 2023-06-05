@@ -55,7 +55,7 @@ export default function PostContainer({
       headers: { userId: userData.id, Authorization: `Bearer ${token}` },
     };
     if (!waiting) {
-      const users = [...usersLiked];
+      const users = usersLiked ? [...usersLiked] : [];
       users.push(userData.name);
       setUsersLiked(users);
       setWaiting(true);
