@@ -9,7 +9,7 @@ export const Container = styled.section`
   max-width: 912px;
   margin: auto;
 `;
-export const Title = styled.h2`
+export const Title = styled.div`
   width: 100%;
   font-family: ${fonts.secondary};
   color: ${colors.neutral};
@@ -29,4 +29,13 @@ export const PostsArea = styled.div`
 `;
 
 export const Timeline = styled.div`
+  h3 {
+    width: 100%;
+    font-family: ${fonts.secondary};
+    color: ${colors.neutral};
+    font-size: 43px;
+    margin-bottom: 43px;
+    display: flex;
+    justify-content: center;
+  }
 `;

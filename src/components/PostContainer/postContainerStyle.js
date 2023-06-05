@@ -112,10 +112,15 @@ flex-direction: column;
 padding: 17px 17px 17px 17px;
 font-family: ${fonts.main};
 h2{
-font-size: 19px;
-font-weight: 400;
-color: ${colors.neutral};
-margin-bottom: 7px;
+  display: inline-block;
+  margin-bottom: 7px;
+a{
+  font-size: 19px;
+  font-weight: 400;
+  color: ${colors.neutral};
+  text-decoration: none;
+  cursor: pointer;
+}
 }
 p{
 font-size: 17px;
