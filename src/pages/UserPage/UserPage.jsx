@@ -43,6 +43,12 @@ export default function TimelinePage() {
   }, []);
 
   useEffect(() => {
+    if (window.innerWidth > 768) {
+      setWindowWidth(true);
+    } else {
+      setWindowWidth(false);
+    }
+
     const handleSize = () => {
       if (window.innerWidth > 768) {
         setWindowWidth(true);
@@ -56,7 +62,7 @@ export default function TimelinePage() {
       window.removeEventListener('resize', handleSize);
     };
   }, []);
-  console.log(windowWidth);
+
   return (
     <>
       <Header />
