@@ -11,7 +11,7 @@ import {
 
 export default function TimelinePage() {
   const [postList, setPostList] = useState(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { userData } = useContext(UserContext);
   const [refresh, setRefresh] = useState();
@@ -42,7 +42,11 @@ export default function TimelinePage() {
 
   useEffect(() => {
     const handleSize = () => {
-      setWindowWidth(window.innerWidth > 768);
+      if (window.innerWidth > 768) {
+        setWindowWidth(true);
+      } else {
+        setWindowWidth(false);
+      }
     };
     window.addEventListener('resize', handleSize);
 
