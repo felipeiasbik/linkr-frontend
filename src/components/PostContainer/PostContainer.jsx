@@ -1,10 +1,9 @@
-/* eslint-disable spaced-comment */
 import reactStringReplace from 'react-string-replace';
 import {
   AiFillDelete, AiFillHeart, AiOutlineEdit, AiOutlineHeart,
 } from 'react-icons/ai';
 import axios from 'axios';
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import { Link } from 'react-router-dom';
 import 'react-tooltip/dist/react-tooltip.css';
@@ -14,6 +13,7 @@ import {
   DeleteModal, ButtonContainer, BackButton, ConfirmButton,
 } from './postContainerStyle.js';
 import { UserContext } from '../../context/userContext.jsx';
+import EditDescription from '../EditDescription/EditDescription.jsx';
 
 export default function PostContainer({
   item, handleLinkClick, refresh, setRefresh,
@@ -37,6 +37,8 @@ export default function PostContainer({
   const [usersLiked, setUsersLiked] = useState(likedUsers);
   const [waiting, setWaiting] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [editDesc, setEditDesc] = useState(false);
+  const [descState, setDescState] = useState(description);
   function buildTip(users) {
     if (!users) return 'Ninguém curtiu';
     const user = users.find((u) => u === userData.name);
@@ -96,7 +98,7 @@ export default function PostContainer({
           console.log(err);
           setWaiting(false);
           setLiked(true);
-          setLikes(likes + 1);
+          setLikes(Number(likes) + 1);
         });
     }
   }
@@ -120,7 +122,7 @@ export default function PostContainer({
       });
   }
   function editPost(id) {
-    alert(`edit ${id}`);
+    setEditDesc(true);
   }
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -176,7 +178,7 @@ export default function PostContainer({
           data-tooltip-variant="light"
         >
           {
-            (likes !== 1)
+            (Number(likes) !== 1)
               ? `${likes} likes`
               : `${likes} like`
           }
@@ -191,17 +193,32 @@ export default function PostContainer({
             </Link>
           </h2>
         </div>
-        <p>
-          {reactStringReplace(description, /(#\w+)/g, (match, i) => (
-            <LinkIds
-              to={`/hashtag/${match.slice(1)}`}
-              key={i}
-              onClick={() => handleLinkClick(match)}
-            >
-              <span>{match}</span>
-            </LinkIds>
-          ))}
-        </p>
+        {
+          !editDesc
+            ? (
+              <p>
+                {reactStringReplace(descState, /(#\w+)/g, (match, i) => (
+                  <LinkIds
+                    to={`/hashtag/${match.slice(1)}`}
+                    key={i}
+                    onClick={() => handleLinkClick(match)}
+                  >
+                    <span>{match}</span>
+                  </LinkIds>
+                ))}
+              </p>
+            )
+            : (
+              <EditDescription
+                value={descState}
+                token={token}
+                setEditDesc={setEditDesc}
+                postId={postId}
+                userData={userData}
+                setDescState={setDescState}
+              />
+            )
+        }
         <Articles>
           {url}
         </Articles>
