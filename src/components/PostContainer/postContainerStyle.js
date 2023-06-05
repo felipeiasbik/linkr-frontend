@@ -73,7 +73,7 @@ width: 76px;
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 17px;
+padding: 17px 17px 17px 34px;;
 img {
   width: 50px;
   height: 50px;
@@ -87,6 +87,9 @@ svg{
   color: ${(props) => (props.like === 'true' ? '#AC0000' : '#FFFFFF')};
 }
 p{
+  display: flex;
+  justify-content: center;
+  width: 55px;
   font-weight: 400;
   font-size: 11px;
   color: #FFFFFF;
