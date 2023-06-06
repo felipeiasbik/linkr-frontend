@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import colors from '../../constants/colors.js';
-import fonts from '../../constants/fonts.js';
+import colors from '../../../constants/colors.js';
+import fonts from '../../../constants/fonts.js';
 
 export const EditInput = styled.input`
   width: 490px;
