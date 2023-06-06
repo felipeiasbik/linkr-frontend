@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import {
   SignUpContainer,
@@ -81,7 +81,9 @@ export default function SignUpPage() {
             data-test="picture-url"
           />
           <SignUpButton disabled={disabled} data-test="sign-up-btn">Sign Up</SignUpButton>
-          <SwitchButton disabled={disabled} onClick={() => navigate('/')} type="button" data-test="login-link">Switch back to log in</SwitchButton>
+          <SwitchButton>
+            <Link data-test="login-link" to="/">Switch back to log in</Link>
+          </SwitchButton>
         </SignUpForm>
       </SignUpContainer>
     </>

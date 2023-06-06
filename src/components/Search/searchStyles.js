@@ -103,3 +103,14 @@ export const ResultName = styled.div`
   font-family: ${fonts.main};
   color: ${colors.search};
 `;
+
+export const Following = styled.p`
+  font-family: ${fonts.main};
+  color: ${colors.following};
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 23px;
+  align-items: flex-end;
+  margin-left: 5px;
+`;

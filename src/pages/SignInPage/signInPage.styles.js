@@ -82,7 +82,10 @@ export const SignInButton = styled.button`
   }
 `;
 
-export const SwitchButton = styled.button`
+export const SwitchButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family:${fonts.main};
   font-style: normal;
   font-weight: 400;
@@ -92,6 +95,11 @@ export const SwitchButton = styled.button`
   height: 65px;
   background-color: ${colors.main};
   text-decoration: underline;
+  a{
+    &:visited{
+      color: ${colors.neutral};
+    }
+  }
   @media (max-width: 768px){
     width: 85%;
     height: 55px;

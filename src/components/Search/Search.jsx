@@ -15,7 +15,7 @@ export default function Searchinput() {
   const [viewWindow, setViewWindow] = useState(window.innerWidth);
   const [searchResults, setSearchResults] = useState([]);
   const { userData } = useContext(UserContext);
-
+  const [value, setValue] = useState('');
   function handleResize() {
     setViewWindow(window.innerWidth);
   }
@@ -29,6 +29,7 @@ export default function Searchinput() {
 
   function handleSearch(event) {
     const searchTerm = event.target.value;
+    setValue(searchTerm);
     if (searchTerm.trim() === '') {
       setSearchResults([]);
       return;
@@ -59,10 +60,11 @@ export default function Searchinput() {
         placeholder={viewWindow <= 768 ? 'Search for people and friends' : 'Search for people'}
         onChange={handleSearch}
         data-test="search"
+        value={value}
       />
       {searchResults.length > 0 && (
         <ResultsContainer>
-          <SearchResult searchResults={searchResults} />
+          <SearchResult searchResults={searchResults} setSearchResults={setSearchResults} />
         </ResultsContainer>
       )}
       <SearchIcon />

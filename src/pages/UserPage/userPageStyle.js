@@ -17,6 +17,13 @@ export const Title = styled.div`
   margin-bottom: 25px;
   margin-top: 15px;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   img{
     width: 54px;
     height: 54px;
@@ -46,5 +53,28 @@ export const Timeline = styled.div`
     margin-bottom: 43px;
     display: flex;
     justify-content: center;
+  }
+`;
+
+export const FollowButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  width: 112px;
+  height: 31px;
+  font-family: ${fonts.main};
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  background: ${({ following }) => (following ? colors.neutral : colors.submitButton)};
+  color: ${({ following }) => (following ? colors.submitButton : colors.neutral)};
+  border-radius: 5px;
+  transition: all .3s;
+  :hover{
+    background: ${({ following }) => (following ? colors.submitButton : colors.neutral)};
+    color: ${({ following }) => (following ? colors.neutral : colors.submitButton)};
   }
 `;

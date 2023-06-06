@@ -28,6 +28,7 @@ export default function EditDescription({
       const description = getValues('edit');
       const body = { description };
       setWaiting(true);
+
       axios.patch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, body, config)
         .then(() => {
           alert('editado');
@@ -35,6 +36,8 @@ export default function EditDescription({
           setDescState(description);
         })
         .catch((err) => {
+          setWaiting(false);
+          setEditDesc(false);
           setValue('edit', description);
           setFocus('edit');
           alert(err.response.data.message);

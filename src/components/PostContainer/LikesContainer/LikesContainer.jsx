@@ -51,7 +51,6 @@ export default function LikesContainer({
       setLiked(false);
       setLikes(Number(likes) - 1);
       setLikesInfo(buildTip(users, userData.name));
-      console.log(buildTip(users, userData.name));
       axios.delete(`${process.env.REACT_APP_API_URL}/likes/posts/${id}`, config)
         .then(() => {
           setWaiting(false);
