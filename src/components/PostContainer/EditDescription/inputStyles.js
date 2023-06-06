@@ -15,6 +15,9 @@ export const EditInput = styled.input`
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+  @media (max-width: 768px){
+    width: 100%;
+  }
   &::placeholder{
     color: ${colors.placeholder};
   }
