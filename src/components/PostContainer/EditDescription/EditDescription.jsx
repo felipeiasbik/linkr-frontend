@@ -28,19 +28,18 @@ export default function EditDescription({
       const description = getValues('edit');
       const body = { description };
       setWaiting(true);
-      console.log(body);
       axios.patch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, body, config)
         .then(() => {
           alert('editado');
-          setWaiting(false);
           setEditDesc(false);
           setDescState(description);
         })
         .catch((err) => {
-          console.log(err);
-          setWaiting(false);
-          setEditDesc(false);
-        });
+          setValue('edit', description);
+          setFocus('edit');
+          alert(err.response.data.message);
+        })
+        .finally(() => setWaiting(false));
     }
   }
   return (
