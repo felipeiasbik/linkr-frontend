@@ -1,5 +1,4 @@
 import reactStringReplace from 'react-string-replace';
-import { AiFillDelete, AiOutlineEdit } from 'react-icons/ai';
 import axios from 'axios';
 import {
   useContext, useEffect, useState,
@@ -7,15 +6,13 @@ import {
 import { Link } from 'react-router-dom';
 import 'react-tooltip/dist/react-tooltip.css';
 import {
-  LinkIds, Posts, InfoLeft, InfoRight, Articles, IconsContainer,
-  DeleteModal, ButtonContainer, BackButton, ConfirmButton,
+  LinkIds, Posts, InfoLeft, InfoRight, Articles,
   MetaDataInfos, MetaDataImage,
 } from './postContainerStyle.js';
 import { UserContext } from '../../context/userContext.jsx';
-import buildTip from '../../helpers/buildTip.js';
 import LikesContainer from './LikesContainer/LikesContainer.jsx';
 import EditDescription from './EditDescription/EditDescription.jsx';
-import LoaderSpinner from './LoaderSpinner/LoaderSpinner.jsx';
+import OptionsContainer from './OptionsContainer/OptionsContainer.jsx';
 
 export default function PostContainer({
   item, handleLinkClick, refresh, setRefresh,
@@ -36,7 +33,6 @@ export default function PostContainer({
   const { userData } = useContext(UserContext);
   const token = JSON.parse(localStorage.getItem('linkr_token'));
   const [waiting, setWaiting] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
   const [editDesc, setEditDesc] = useState(false);
   const [descState, setDescState] = useState(description);
   const [metaData, setMetaData] = useState(null);
@@ -56,55 +52,18 @@ export default function PostContainer({
       });
   }, []);
 
-  function deletePost(id) {
-    const config = {
-      headers: { userId: userData.id, Authorization: `Bearer ${token}` },
-    };
-    setWaiting(true);
-    axios.delete(`${process.env.REACT_APP_API_URL}/posts/${id}`, config)
-      .then(() => {
-        alert('deletado');
-        setWaiting(false);
-        setModalOpen(false);
-        setRefresh(!refresh);
-      })
-      .catch((err) => {
-        alert('Oops, something went wrong. The post was not deleted.');
-        setModalOpen(false);
-        setWaiting(false);
-      });
-  }
-  function editPost() {
-    setEditDesc(!editDesc);
-  }
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
-
   return (
     <Posts data-test="post">
-      <IconsContainer userLogged={userData.id} owner={userId}>
-        <AiOutlineEdit data-test="edit-btn" onClick={editPost} />
-        <AiFillDelete data-test="delete-btn" onClick={handleOpenModal} />
-      </IconsContainer>
-      <DeleteModal isOpen={modalOpen}>
-        <p>Are you sure you want to delete this post?</p>
-        <ButtonContainer>
-          <BackButton data-test="cancel" disabled={waiting} type="button" onClick={handleCloseModal}>
-            No, go back
-          </BackButton>
-          <ConfirmButton data-test="confirm" disabled={waiting} type="button" onClick={() => deletePost(postId)}>
-            {
-              waiting
-                ? <LoaderSpinner />
-                : 'Yes, delete it'
-            }
-          </ConfirmButton>
-        </ButtonContainer>
-      </DeleteModal>
+      <OptionsContainer
+        userId={userId}
+        waiting={waiting}
+        setWaiting={setWaiting}
+        postId={postId}
+        refresh={refresh}
+        setRefresh={setRefresh}
+        editDesc={editDesc}
+        setEditDesc={setEditDesc}
+      />
       <InfoLeft>
         <Link to={`/user/${item.user_id}`}>
           <img alt={name} src={photo} />
