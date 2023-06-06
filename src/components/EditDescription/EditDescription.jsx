@@ -1,12 +1,22 @@
-import { useState } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
 import { EditInput } from './inputStyles';
 
 export default function EditDescription({
   value, setEditDesc, token, userData, postId, setDescState,
 }) {
-  const [description, setDescription] = useState(value);
   const [waiting, setWaiting] = useState(false);
+  const {
+    register, setFocus, setValue, getValues,
+  } = useForm();
+
+  useEffect(() => {
+    setValue('edit', value);
+    setFocus('edit');
+  }, []);
   function evento(event) {
     if (event.key === 'Escape') {
       setEditDesc(false);
@@ -15,6 +25,7 @@ export default function EditDescription({
       const config = {
         headers: { userId: userData.id, Authorization: `Bearer ${token}` },
       };
+      const description = getValues('edit');
       const body = { description };
       setWaiting(true);
       console.log(body);
@@ -35,10 +46,9 @@ export default function EditDescription({
   return (
     <EditInput
       type="text"
-      value={description}
+      {...register('edit')}
       disabled={waiting}
       onKeyDown={evento}
-      onChange={(event) => setDescription(event.target.value)}
       data-test="edit-input"
     />
   );

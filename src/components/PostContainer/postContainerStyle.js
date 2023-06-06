@@ -87,6 +87,7 @@ svg{
   margin-bottom: 5px;
   font-size: 30px;
   color: ${(props) => (props.like === 'true' ? '#AC0000' : '#FFFFFF')};
+  cursor: pointer;
 }
 p{
   display: flex;
