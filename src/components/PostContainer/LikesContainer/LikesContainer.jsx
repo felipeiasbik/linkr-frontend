@@ -31,9 +31,9 @@ export default function LikesContainer({
       axios.post(`${process.env.REACT_APP_API_URL}/likes/posts/${id}`, {}, config)
         .then(() => {
           setWaiting(false);
-          alert('liked');
         })
         .catch((err) => {
+          alert(err.response.data.message);
           setWaiting(false);
           setLiked(false);
           setLikes(likes - 1);
@@ -54,9 +54,9 @@ export default function LikesContainer({
       axios.delete(`${process.env.REACT_APP_API_URL}/likes/posts/${id}`, config)
         .then(() => {
           setWaiting(false);
-          alert('unliked');
         })
         .catch((err) => {
+          alert(err.response.data.message);
           setWaiting(false);
           setLiked(true);
           setLikes(Number(likes) + 1);
