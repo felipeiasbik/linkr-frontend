@@ -62,6 +62,7 @@ export const Posts = styled.div`
 background-color: ${colors.modal};
 border-radius: 16px;
 display: flex;
+z-index: 2;
 @media (max-width: 768px){
     border-radius: 0px;
     padding-right: 15px;
@@ -206,6 +207,6 @@ min-height: 250px;
 display: flex;
 flex-direction: column;
 align-items: center;
-position: relative;
 margin-bottom: 16px;
+z-index: 2;
 `;

@@ -47,7 +47,14 @@ export default function OptionsContainer({
         <AiOutlineEdit data-test="edit-btn" onClick={editPost} />
         <AiFillDelete data-test="delete-btn" onClick={handleOpenModal} />
       </IconsContainer>
-      <DeleteModal isOpen={modalOpen}>
+      <DeleteModal
+        isOpen={modalOpen}
+        style={{
+          overlay: {
+            zIndex: '3',
+          },
+        }}
+      >
         <p>Are you sure you want to delete this post?</p>
         <ButtonContainer>
           <BackButton data-test="cancel" disabled={waiting} type="button" onClick={handleCloseModal}>
