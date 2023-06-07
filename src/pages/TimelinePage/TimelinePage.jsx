@@ -9,7 +9,6 @@ import CreatePostArea from './CreatePostArea/CreatePostArea.jsx';
 import {
   Container, Title, Content, PostsArea, Timeline, NewPosts, ReloadIcon,
 } from './timelinePageStyle.js';
-import realoadIcon from '../../assets/realoadIcon.png';
 
 export default function TimelinePage() {
   const [postList, setPostList] = useState(null);
@@ -122,18 +121,15 @@ export default function TimelinePage() {
               )}
               {!isLoading && newPosts.length > 0 && (
               <NewPosts onClick={handleNewPosts}>
-                {newPosts.length}
-                {' '}
-                new posts, load more!
-                {' '}
-                <ReloadIcon src={realoadIcon} />
+                {`${newPosts.length} new ${newPosts.length > 1 ? 'posts' : 'post'}, load more!`}
+                <ReloadIcon />
               </NewPosts>
               ) }
               {!isLoading && postList && postList.length > 0 && (
-                postList?.map((item) => (
+                postList?.map((item, index) => (
                   <PostContainer
                     item={item}
-                    key={item.post_id}
+                    key={index}
                     refresh={refresh}
                     setRefresh={setRefresh}
                   />

@@ -162,7 +162,7 @@ export default function PostContainer({
           </LinkIds>
         </InfoRight>
       </Posts>
-      <CommentsContainer showComments={showComments} />
+      <CommentsContainer userId={userId} postId={postId} showComments={showComments} />
     </PostContent>
   );
 }
