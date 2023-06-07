@@ -8,4 +8,7 @@ justify-content: center;
 align-items: center;
 background: #1E1E1E;
 border-radius: 16px;
+@media (max-width: 611px){
+  width: 100%;
+}
 `;

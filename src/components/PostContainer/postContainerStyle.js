@@ -203,7 +203,6 @@ border-radius: 0 11px 11px 0;
 export const PostContent = styled.div`
 max-height: 650px;
 min-height: 250px;
-width: 610px;
 display: flex;
 flex-direction: column;
 align-items: center;
