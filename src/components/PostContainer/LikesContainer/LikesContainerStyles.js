@@ -8,10 +8,13 @@ align-items: center;
 font-family:${fonts.main};
 svg{
   margin-top: 10px;
-  margin-bottom: 5px;
-  font-size: 30px;
+  margin-bottom: 2px;
+  font-size: 21px;
   color: ${(props) => (props.like === 'true' ? '#AC0000' : '#FFFFFF')};
   cursor: pointer;
+  @media (max-width: 768px){
+    font-size: 18px;
+  }
 }
 p{
   display: flex;
@@ -20,5 +23,8 @@ p{
   font-weight: 400;
   font-size: 11px;
   color: #FFFFFF;
+  @media (max-width: 768px){
+    font-size: 9px;
+  }
 }
 `;

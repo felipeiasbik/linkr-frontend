@@ -99,6 +99,7 @@ export default function TimelinePage() {
     setNewPosts([]);
     setMostRecently(newPostList[0]);
   }
+  console.log(postList);
   return (
     <>
       <Header />
