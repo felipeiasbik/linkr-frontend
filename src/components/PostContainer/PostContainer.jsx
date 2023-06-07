@@ -30,6 +30,7 @@ export default function PostContainer({
     likeCount,
     likedUsers,
     user_id: userId,
+    commentCount,
   } = item;
 
   const { userData } = useContext(UserContext);
@@ -80,7 +81,11 @@ export default function PostContainer({
             waiting={waiting}
             setWaiting={setWaiting}
           />
-          <Comments showComments={showComments} setShowComments={setShowComments} />
+          <Comments
+            commentCount={commentCount}
+            showComments={showComments}
+            setShowComments={setShowComments}
+          />
         </InfoLeft>
         <InfoRight>
           <div>
@@ -128,7 +133,7 @@ export default function PostContainer({
           </LinkIds>
         </InfoRight>
       </Posts>
-      <CommentsContainer showComments={showComments} />
+      <CommentsContainer userId={userId} postId={postId} showComments={showComments} />
     </PostContent>
   );
 }
