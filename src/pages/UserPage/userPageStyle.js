@@ -77,4 +77,7 @@ export const FollowButton = styled.button`
     background: ${({ following }) => (following ? colors.submitButton : colors.neutral)};
     color: ${({ following }) => (following ? colors.neutral : colors.submitButton)};
   }
+  :active {
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 1);
+  }
 `;
