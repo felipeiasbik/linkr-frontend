@@ -10,13 +10,13 @@ svg{
   margin-top: 10px;
   margin-bottom: 5px;
   font-size: 30px;
-  color: ${(props) => (props.like === 'true' ? '#AC0000' : '#FFFFFF')};
+  color: #FFFFFF;
   cursor: pointer;
 }
 p{
   display: flex;
   justify-content: center;
-  width: 55px;
+  width: 70px;
   font-weight: 400;
   font-size: 11px;
   color: #FFFFFF;

@@ -1,5 +1,6 @@
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
+import fonts from '../../../constants/fonts';
 
 export const IconsContainer = styled.div`
 display: ${({ userLogged, owner }) => (userLogged === owner ? 'flex' : 'none')};
@@ -25,7 +26,8 @@ border-radius: 50px;
 display: flex;
 flex-direction: column;
 align-items: center;
-font-family: 'Lato';
+font-family: ${fonts.main};
+z-index: 5;
 p{
   width: 350px;
   margin: 10px 0;
