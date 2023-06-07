@@ -62,10 +62,42 @@ export const Posts = styled.div`
 background-color: ${colors.modal};
 border-radius: 16px;
 display: flex;
+z-index: 1;
 @media (max-width: 768px){
     border-radius: 0px;
-    padding-right: 15px;
+    width: 100%;
   }
+`;
+export const RepostContent = styled.div`
+width: 611px;
+padding: 8px 15px 20px 15px;
+border-radius: 16px 16px 0 0;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+margin-bottom: -12px;
+background-color: ${colors.reposts};
+color: ${colors.neutral};
+font-family: ${fonts.main};
+font-weight: 400;
+font-size: 11px;
+span {
+  font-weight: 700;
+  margin-left: 3px;
+}
+svg{
+  margin-right: 5px;
+  font-size: 20px;
+  color: ${colors.neutral};
+  cursor: pointer;
+}
+@media (max-width: 768px){
+  width: 100%;
+  border-radius: 0;
+  svg{
+    font-size: 15px;
+  }
+}
 `;
 export const InfoLeft = styled.div`
 width: 70px;
@@ -208,4 +240,7 @@ flex-direction: column;
 align-items: center;
 position: relative;
 margin-bottom: 16px;
+@media (max-width: 768px){
+  margin-bottom: 0px;
+}
 `;

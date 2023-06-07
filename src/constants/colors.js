@@ -11,6 +11,7 @@ const colors = {
   search: '#515151',
   resultSearch: '#E7E7E7',
   following: '#C5C5C5',
+  reposts: '#1E1E1E',
 };
 
 export default colors;
