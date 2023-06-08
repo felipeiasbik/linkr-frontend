@@ -17,7 +17,7 @@ export default function EditDescription({
     setValue('edit', value);
     setFocus('edit');
   }, []);
-  function evento(event) {
+  function handleKeys(event) {
     if (event.key === 'Escape') {
       setEditDesc(false);
     }
@@ -50,7 +50,7 @@ export default function EditDescription({
       type="text"
       {...register('edit')}
       disabled={waiting}
-      onKeyDown={evento}
+      onKeyDown={handleKeys}
       data-test="edit-input"
     />
   );

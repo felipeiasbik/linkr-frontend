@@ -59,6 +59,7 @@ align-items: flex-start;
 }
 `;
 export const Posts = styled.div`
+position: relative;
 background-color: ${colors.modal};
 border-radius: 16px;
 display: flex;
