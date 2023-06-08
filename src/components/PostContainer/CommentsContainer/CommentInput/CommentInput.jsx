@@ -23,7 +23,6 @@ export default function CommentInput({
     const body = { description: form.comment };
     axios.post(`${process.env.REACT_APP_API_URL}/comments/posts/${postId}`, body, config)
       .then(() => {
-        alert('success');
         setForm({ comment: '' });
         setComments(Number(comments) + 1);
         setRefresh(!refresh);
@@ -37,6 +36,7 @@ export default function CommentInput({
       <img src={photo} />
       <form onSubmit={postComment}>
         <input
+          data-test="comment-input"
           type="text"
           placeholder="write a comment..."
           name="comment"
@@ -46,7 +46,7 @@ export default function CommentInput({
           disabled={waiting}
           required
         />
-        <button type="submit" disabled={waiting}>
+        <button data-test="comment-submit" type="submit" disabled={waiting}>
           <BsSend />
         </button>
       </form>

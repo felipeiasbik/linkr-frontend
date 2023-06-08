@@ -39,7 +39,7 @@ export default function CommentsContainer({
   }, [showComments, refresh]);
   return (
     <BackContainer showComments={showComments}>
-      <CommentsBox>
+      <CommentsBox data-test="comment-box">
         <Container>
           {
             data
