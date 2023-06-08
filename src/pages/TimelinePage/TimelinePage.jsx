@@ -22,8 +22,6 @@ export default function TimelinePage() {
   const [lastUpdate, setLastUpdate] = useState();
   useEffect(() => {
     setIsLoading(true);
-    const currentDate = new Date(Date.now());
-    const timestamp = currentDate.getTime();
     const token = JSON.parse(localStorage.getItem('linkr_token'));
     if (userData) {
       const config = {
@@ -35,6 +33,8 @@ export default function TimelinePage() {
       (async () => {
         try {
           const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
+          const currentDate = new Date(Date.now());
+          const timestamp = currentDate.getTime();
           setLastUpdate(timestamp);
           setPostList(data);
         } catch (err) {
@@ -82,10 +82,8 @@ export default function TimelinePage() {
           const receivedPosts = data.filter(({ created_at: createdAt, user_id: userId, repost_created_at: repostCreated }) => {
             const postTimestamp = repostCreated ? dayjs(repostCreated).valueOf() : dayjs(createdAt).valueOf();
             const isNew = dayjs(postTimestamp).isAfter(lastUpdate);
-            const isMine = userId === userData.id;
-            return isNew && !isMine;
+            return isNew;
           });
-          console.log(receivedPosts);
           setNewPosts(receivedPosts);
         } catch (err) {
           console.log(err?.response?.data);
@@ -97,8 +95,8 @@ export default function TimelinePage() {
   function handleNewPosts() {
     const currentDate = new Date(Date.now());
     const timestamp = currentDate.getTime();
-    setPostList([...newPosts, ...postList]);
     setNewPosts([]);
+    setRefresh(!refresh);
     setLastUpdate(timestamp);
   }
   return (

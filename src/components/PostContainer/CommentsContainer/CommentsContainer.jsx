@@ -1,4 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import {
+  useContext, useEffect, useState,
+} from 'react';
 import axios from 'axios';
 import CircleLoader from '../LoaderSpinner/CircleLoader';
 import {
@@ -24,7 +26,6 @@ export default function CommentsContainer({
     if (showComments) {
       axios.get(`${process.env.REACT_APP_API_URL}/comments/posts/${postId}`, config)
         .then((response) => {
-          console.log(response.data);
           if (response.data.length === 0) {
             setMessage(true);
           } else setMessage(false);
