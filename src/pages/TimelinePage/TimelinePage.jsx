@@ -1,6 +1,8 @@
+/* eslint-disable max-len */
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
 import useInterval from 'use-interval';
+import dayjs from 'dayjs';
 import { UserContext } from '../../context/userContext.jsx';
 import Header from '../../components/Header/Header.jsx';
 import Sidebar from '../../components/Sidebar/Sidebar.jsx';
@@ -17,9 +19,11 @@ export default function TimelinePage() {
   const { userData } = useContext(UserContext);
   const [refresh, setRefresh] = useState();
   const [newPosts, setNewPosts] = useState([]);
-  const [mostRecently, setMostRecently] = useState();
+  const [lastUpdate, setLastUpdate] = useState();
   useEffect(() => {
     setIsLoading(true);
+    const currentDate = new Date(Date.now());
+    const timestamp = currentDate.getTime();
     const token = JSON.parse(localStorage.getItem('linkr_token'));
     if (userData) {
       const config = {
@@ -31,7 +35,7 @@ export default function TimelinePage() {
       (async () => {
         try {
           const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
-          setMostRecently(data[0]);
+          setLastUpdate(timestamp);
           setPostList(data);
         } catch (err) {
           console.log(err?.response?.data);
@@ -75,12 +79,13 @@ export default function TimelinePage() {
       (async () => {
         try {
           const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
-          const receivedPosts = data.filter(({ created_at: createdAt, user_id: userId }) => {
-            const lastTimeStamp = new Date(mostRecently.created_at).getTime();
-            const newPostTimeStamp = new Date(createdAt).getTime();
-            const notMe = userData.id !== userId;
-            return notMe && newPostTimeStamp > lastTimeStamp;
+          const receivedPosts = data.filter(({ created_at: createdAt, user_id: userId, repost_created_at: repostCreated }) => {
+            const postTimestamp = repostCreated ? dayjs(repostCreated).valueOf() : dayjs(createdAt).valueOf();
+            const isNew = dayjs(postTimestamp).isAfter(lastUpdate);
+            const isMine = userId === userData.id;
+            return isNew && !isMine;
           });
+          console.log(receivedPosts);
           setNewPosts(receivedPosts);
         } catch (err) {
           console.log(err?.response?.data);
@@ -90,14 +95,11 @@ export default function TimelinePage() {
   }, 15000);
 
   function handleNewPosts() {
-    const notDuplicated = newPosts.filter(({ id }) => {
-      const duplicated = postList.some(({ post_id: postId }) => postId === id);
-      return !duplicated;
-    });
-    const newPostList = [...notDuplicated, ...postList];
-    setPostList(newPostList);
+    const currentDate = new Date(Date.now());
+    const timestamp = currentDate.getTime();
+    setPostList([...newPosts, ...postList]);
     setNewPosts([]);
-    setMostRecently(newPostList[0]);
+    setLastUpdate(timestamp);
   }
   return (
     <>
