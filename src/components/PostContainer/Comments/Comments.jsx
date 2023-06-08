@@ -1,12 +1,13 @@
 import { AiOutlineComment } from 'react-icons/ai';
 import { Content } from './commentsStyles';
 
-export default function Comments({ commentCount, showComments, setShowComments }) {
+export default function Comments({ comments, showComments, setShowComments }) {
   return (
     <Content>
-      <AiOutlineComment onClick={() => setShowComments(!showComments)} />
-      <p>
-        {commentCount}
+      <AiOutlineComment data-test="comment-btn" onClick={() => setShowComments(!showComments)} />
+      <p data-test="comment-counter">
+        {comments}
+        {' '}
         comments
       </p>
     </Content>

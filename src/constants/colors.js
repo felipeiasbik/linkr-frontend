@@ -16,6 +16,7 @@ const colors = {
   comment: '#ACACAC',
   commentFollowing: '#565656',
   commentBackground: '#1E1E1E',
+  commentInput: '#252525',
 };
 
 export default colors;

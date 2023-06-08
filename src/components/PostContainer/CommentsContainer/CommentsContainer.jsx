@@ -6,12 +6,16 @@ import {
 } from './commentsContainerStyles';
 import { UserContext } from '../../../context/userContext';
 import Comment from './Comment/Comment';
+import CommentInput from './CommentInput/CommentInput';
 
-export default function CommentsContainer({ showComments, postId, userId }) {
+export default function CommentsContainer({
+  showComments, postId, userId, comments, setComments,
+}) {
   const { userData } = useContext(UserContext);
   const token = JSON.parse(localStorage.getItem('linkr_token'));
   const [data, setData] = useState(undefined);
   const [message, setMessage] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const config = {
@@ -24,16 +28,18 @@ export default function CommentsContainer({ showComments, postId, userId }) {
           if (response.data.length === 0) {
             setMessage(true);
           }
+          setComments(response.data.length);
           setData(response.data);
+          setMessage(false);
         })
         .catch((err) => {
           alert(err.response.data.message);
         });
     }
-  }, [showComments]);
+  }, [showComments, refresh]);
   return (
     <BackContainer showComments={showComments}>
-      <CommentsBox>
+      <CommentsBox data-test="comment-box">
         <Container>
           {
             data
@@ -42,6 +48,14 @@ export default function CommentsContainer({ showComments, postId, userId }) {
           }
           {message && <EmptyMessage>No comments here!</EmptyMessage>}
         </Container>
+        <CommentInput
+          photo={userData.photo}
+          postId={postId}
+          refresh={refresh}
+          setRefresh={setRefresh}
+          comments={comments}
+          setComments={setComments}
+        />
       </CommentsBox>
     </BackContainer>
   );

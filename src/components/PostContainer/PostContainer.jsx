@@ -45,6 +45,7 @@ export default function PostContainer({
   const [descState, setDescState] = useState(description);
   const [metaData, setMetaData] = useState(null);
   const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState(commentCount);
 
   useEffect(() => {
     axios.get(`https://jsonlink.io/api/extract?url=${url}`)
@@ -103,7 +104,7 @@ export default function PostContainer({
             setWaiting={setWaiting}
           />
           <Comments
-            commentCount={commentCount}
+            comments={comments}
             showComments={showComments}
             setShowComments={setShowComments}
           />
@@ -162,7 +163,13 @@ export default function PostContainer({
           </LinkIds>
         </InfoRight>
       </Posts>
-      <CommentsContainer userId={userId} postId={postId} showComments={showComments} />
+      <CommentsContainer
+        userId={userId}
+        postId={postId}
+        showComments={showComments}
+        comments={comments}
+        setComments={setComments}
+      />
     </PostContent>
   );
 }

@@ -6,7 +6,7 @@ export default function Comment({ data, userId }) {
   } = data;
   const author = Number(data.user_id) === Number(userId);
   return (
-    <CommentCard>
+    <CommentCard data-test="comment">
       <img src={photo} />
       <RightContainer>
         <NameContainer>
