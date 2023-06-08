@@ -128,7 +128,7 @@ export default function PostContainer({
           {
           !editDesc
             ? (
-              <p>
+              <p data-test="description">
                 {reactStringReplace(descState, /(#\w+)/g, (match, i) => (
                   <LinkIds
                     to={`/hashtag/${match.slice(1)}`}

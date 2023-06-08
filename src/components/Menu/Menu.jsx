@@ -21,7 +21,7 @@ export default function Menu({ modalIsOpen, handleModal }) {
         },
       }}
     >
-      <MenuContainer>
+      <MenuContainer data-test="menu">
         <LogoutButton
           type="button"
           onClick={() => setLogout(true)}
