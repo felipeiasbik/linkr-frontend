@@ -1,20 +1,35 @@
-import ReactModal from 'react-modal';
 import styled from 'styled-components';
+import ReactModal from 'react-modal';
 import fonts from '../../../constants/fonts';
 
-export const IconsContainer = styled.div`
-display: ${({ userLogged, owner }) => (userLogged === owner ? 'flex' : 'none')};
-position:absolute;
-top:10px;
-right: 10px;
+export const Content = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+font-family:${fonts.main};
 svg{
-  margin:5px;
-  font-size: 16px;
-  color: #ffffff;
+  margin-top: 10px;
+  margin-bottom: 2px;
+  font-size: 21px;
+  color: #FFFFFF;
+  cursor: pointer;
+  @media (max-width: 768px){
+    font-size: 18px;
+  }
+}
+p{
+  display: flex;
+  justify-content: center;
+  width: 70px;
+  font-weight: 400;
+  font-size: 11px;
+  color: #FFFFFF;
+  @media (max-width: 768px){
+    font-size: 9px;
+  }
 }
 `;
-
-export const DeleteModal = styled(ReactModal)`
+export const RepostNow = styled(ReactModal)`
 position: absolute;
 top: calc(50% - 131px);
 left: calc(50% - 283px);
@@ -27,6 +42,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 font-family: ${fonts.main};
+z-index: 5;
 p{
   width: 350px;
   margin: 10px 0;

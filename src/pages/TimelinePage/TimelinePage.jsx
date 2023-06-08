@@ -101,6 +101,7 @@ export default function TimelinePage() {
     setNewPosts([]);
     setLastUpdate(timestamp);
   }
+  console.log(postList);
   return (
     <>
       <Header />
@@ -127,10 +128,10 @@ export default function TimelinePage() {
               </NewPosts>
               ) }
               {!isLoading && postList && postList.length > 0 && (
-                postList?.map((item) => (
+                postList?.map((item, index) => (
                   <PostContainer
                     item={item}
-                    key={item.post_id}
+                    key={index}
                     refresh={refresh}
                     setRefresh={setRefresh}
                   />

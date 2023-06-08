@@ -5,9 +5,10 @@ import {
 } from 'react';
 import { Link } from 'react-router-dom';
 import 'react-tooltip/dist/react-tooltip.css';
+import { BiRepost } from 'react-icons/bi';
 import {
   LinkIds, Posts, InfoLeft, InfoRight, Articles,
-  MetaDataInfos, MetaDataImage, PostContent,
+  MetaDataInfos, MetaDataImage, PostContent, RepostContent,
 } from './postContainerStyle.js';
 import { UserContext } from '../../context/userContext.jsx';
 import LikesContainer from './LikesContainer/LikesContainer.jsx';
@@ -15,6 +16,7 @@ import EditDescription from './EditDescription/EditDescription.jsx';
 import OptionsContainer from './OptionsContainer/OptionsContainer.jsx';
 import Comments from './Comments/Comments.jsx';
 import CommentsContainer from './CommentsContainer/CommentsContainer.jsx';
+import Reposts from './Reposts/Reposts.jsx';
 
 export default function PostContainer({
   item, handleLinkClick, refresh, setRefresh,
@@ -29,7 +31,11 @@ export default function PostContainer({
     userLikedPost,
     likeCount,
     likedUsers,
+    commentCount,
     user_id: userId,
+    repost_user_id: repostUserId,
+    repost_user_name: repostUserName,
+    repostCount,
   } = item;
 
   const { userData } = useContext(UserContext);
@@ -51,12 +57,28 @@ export default function PostContainer({
         });
       })
       .catch((err) => {
-        alert(err.message);
+        if (err.config.url.includes('https://jsonlink.io/api/extract')) {
+          return false;
+        }
+        return alert(err.message);
       });
   }, []);
 
   return (
     <PostContent>
+      {repostUserName !== null
+      && (
+      <RepostContent>
+        <BiRepost />
+        Re-posted by
+        {' '}
+        <span>
+          <LinkIds to={`/user/${repostUserId}`}>
+            {userData.id === repostUserId ? 'you' : repostUserName}
+          </LinkIds>
+        </span>
+      </RepostContent>
+      )}
       <Posts data-test="post">
         <OptionsContainer
           userId={userId}
@@ -80,7 +102,19 @@ export default function PostContainer({
             waiting={waiting}
             setWaiting={setWaiting}
           />
-          <Comments showComments={showComments} setShowComments={setShowComments} />
+          <Comments
+            commentCount={commentCount}
+            showComments={showComments}
+            setShowComments={setShowComments}
+          />
+          <Reposts
+            postId={postId}
+            repostCount={repostCount}
+            waiting={waiting}
+            setWaiting={setWaiting}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
         </InfoLeft>
         <InfoRight>
           <div>
@@ -128,7 +162,7 @@ export default function PostContainer({
           </LinkIds>
         </InfoRight>
       </Posts>
-      <CommentsContainer showComments={showComments} />
+      <CommentsContainer userId={userId} postId={postId} showComments={showComments} />
     </PostContent>
   );
 }
