@@ -28,6 +28,7 @@ export default function CommentsContainer({
           if (response.data.length === 0) {
             setMessage(true);
           }
+          setComments(response.data.length);
           setData(response.data);
           setMessage(false);
         })
