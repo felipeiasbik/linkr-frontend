@@ -27,10 +27,9 @@ export default function CommentsContainer({
           console.log(response.data);
           if (response.data.length === 0) {
             setMessage(true);
-          }
+          } else setMessage(false);
           setComments(response.data.length);
           setData(response.data);
-          setMessage(false);
         })
         .catch((err) => {
           alert(err.response.data.message);

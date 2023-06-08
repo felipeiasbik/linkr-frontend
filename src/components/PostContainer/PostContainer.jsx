@@ -90,6 +90,7 @@ export default function PostContainer({
           setRefresh={setRefresh}
           editDesc={editDesc}
           setEditDesc={setEditDesc}
+          repostUserId={repostUserId}
         />
         <InfoLeft>
           <Link to={`/user/${item.user_id}`}>
