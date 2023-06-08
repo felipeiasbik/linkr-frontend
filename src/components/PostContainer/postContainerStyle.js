@@ -69,7 +69,7 @@ z-index: 2;
   }
 `;
 export const RepostContent = styled.div`
-width: 611px;
+width: 610px;
 padding: 8px 15px 20px 15px;
 border-radius: 16px 16px 0 0;
 display: flex;

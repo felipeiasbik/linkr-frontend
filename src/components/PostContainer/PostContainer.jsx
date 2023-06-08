@@ -66,19 +66,19 @@ export default function PostContainer({
 
   return (
     <PostContent>
-      {repostUserName !== null
-      && (
-      <RepostContent>
-        <BiRepost />
-        Re-posted by
-        {' '}
-        <span>
-          <LinkIds to={`/user/${repostUserId}`}>
-            {userData.id === repostUserId ? 'you' : repostUserName}
-          </LinkIds>
-        </span>
-      </RepostContent>
-      )}
+      {repostUserName == null ? ''
+        : (
+          <RepostContent>
+            <BiRepost />
+            Re-posted by
+            {' '}
+            <span>
+              <LinkIds to={`/user/${repostUserId}`}>
+                {userData.id === repostUserId ? 'you' : repostUserName}
+              </LinkIds>
+            </span>
+          </RepostContent>
+        )}
       <Posts data-test="post">
         <OptionsContainer
           userId={userId}

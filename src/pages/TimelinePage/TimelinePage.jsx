@@ -101,7 +101,6 @@ export default function TimelinePage() {
     setNewPosts([]);
     setLastUpdate(timestamp);
   }
-  console.log(postList);
   return (
     <>
       <Header />

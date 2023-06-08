@@ -52,6 +52,13 @@ p{
   text-align: center;
   color: #FFFFFF;
 }
+  @media (max-width: 768px){
+  left: calc(0%);
+  border-radius: 0px;
+  padding: 20px;
+  width: 100%;
+  height: auto;
+  }
 `;
 export const ButtonContainer = styled.div`
 display: flex;
