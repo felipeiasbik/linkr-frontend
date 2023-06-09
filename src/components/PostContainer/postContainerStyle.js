@@ -212,26 +212,26 @@ line-height: 13px
 `;
 
 export const MetaDataImage = styled.div`
-display: flex;
-justify-content: flex-end;
-width: 155px;
-height: 153px;
-border-radius: 0 11px 11px 0;
-img{
-background-color: ${colors.neutral};
-width: 155px;
-height: 153px;
-object-fit: cover;
-border-radius: 0 11px 11px 0;
-@media (max-width: 768px){
-  width: 95px;
-  height: 115px;
+  display: flex;
+  justify-content: flex-end;
+  width: 155px;
+  height: 153px;
+  border-radius: 0 11px 11px 0;
   img{
-  width: 95px;
-  height: 115px;
+  background-color: ${colors.neutral};
+  width: 155px;
+  height: 153px;
+  object-fit: cover;
+  border-radius: 0 11px 11px 0;
   }
-}
-}
+  @media (max-width: 768px){
+    width: 95px;
+    height: 115px;
+    img{
+    width: 95px;
+    height: 115px;
+    }
+  }
 `;
 export const PostContent = styled.div`
 max-height: 650px;
