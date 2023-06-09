@@ -1,4 +1,4 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
 import dayjs from 'dayjs';
@@ -24,7 +24,6 @@ export default function UserPage() {
   const { id } = useParams();
   const [refresh, setRefresh] = useState(false);
   const [oldId, setOldId] = useState(id);
-
   useEffect(() => {
     if (window.innerWidth > 768) {
       setWindowWidth(true);
@@ -132,8 +131,6 @@ export default function UserPage() {
     setPage((prevState) => prevState + 1);
   }
 
-  console.log(page);
-  console.log(postList);
   return (
     <>
       <Header />
