@@ -53,8 +53,6 @@ export default function CommentsContainer({
           postId={postId}
           refresh={refresh}
           setRefresh={setRefresh}
-          comments={comments}
-          setComments={setComments}
         />
       </CommentsBox>
     </BackContainer>
