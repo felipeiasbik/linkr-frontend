@@ -145,6 +145,7 @@ export default function UserPage() {
           </div>
           {userInfo && userInfo.id !== userData.id && (
             <FollowButton
+              data-test="follow-btn"
               disabled={disabled}
               following={following}
               onClick={() => handleFollow(userInfo.id)}

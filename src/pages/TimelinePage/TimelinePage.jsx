@@ -173,7 +173,7 @@ export default function TimelinePage() {
               </h3>
               )}
               {!isLoading && newPosts.length > 0 && (
-              <NewPosts onClick={handleNewPosts}>
+              <NewPosts onClick={handleNewPosts} data-test="load-btn">
                 {`${newPosts.length} new ${newPosts.length > 1 ? 'posts' : 'post'}, load more!`}
                 <ReloadIcon />
               </NewPosts>

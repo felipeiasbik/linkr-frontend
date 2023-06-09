@@ -13,7 +13,7 @@ export function SearchResult({ searchResults, setSearchResults }) {
     <>
       {searchResults.map((result) => (
         <ResultItem key={result.id} data-test="user-search" onClick={() => navigateToUser(result.id)}>
-          <LinkIds>
+          <LinkIds data-test="user-search">
             {result.photo && <ResultImage src={result.photo} alt={result.name} />}
             <ResultName>{result.name}</ResultName>
             {result.followingUser && <Following>• following </Following>}
