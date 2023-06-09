@@ -19,7 +19,7 @@ import CommentsContainer from './CommentsContainer/CommentsContainer.jsx';
 import Reposts from './Reposts/Reposts.jsx';
 
 export default function PostContainer({
-  item, handleLinkClick, refresh, setRefresh,
+  item, handleLinkClick, getPosts,
 }) {
   const {
     post_id: postId,
@@ -86,8 +86,7 @@ export default function PostContainer({
           waiting={waiting}
           setWaiting={setWaiting}
           postId={postId}
-          refresh={refresh}
-          setRefresh={setRefresh}
+          getPosts={getPosts}
           editDesc={editDesc}
           setEditDesc={setEditDesc}
           repostUserId={repostUserId}
@@ -114,8 +113,7 @@ export default function PostContainer({
             repostCount={repostCount}
             waiting={waiting}
             setWaiting={setWaiting}
-            refresh={refresh}
-            setRefresh={setRefresh}
+            getPosts={getPosts}
           />
         </InfoLeft>
         <InfoRight>

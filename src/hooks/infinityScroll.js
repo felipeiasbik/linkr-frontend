@@ -9,7 +9,6 @@ export default function InfinityScroll({ callback, makeNewRequest }) {
 
       if (ratio > 0) {
         callback();
-        console.log('neotu');
       }
     });
     if (divInfiniteScrollRef.current) {

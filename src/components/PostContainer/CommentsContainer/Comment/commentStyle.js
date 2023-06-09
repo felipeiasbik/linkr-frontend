@@ -14,6 +14,7 @@ img{
   height: 39px;
   object-fit: cover;
   border-radius: 50%;
+  cursor: pointer;
 }
 `;
 
@@ -35,6 +36,7 @@ span{
   font-weight: 700;
   font-size: 14px;
   line-height: 17px;
+  cursor: pointer;
 }
 p{
  color: ${colors.commentFollowing};
