@@ -42,9 +42,9 @@ export default function Reposts({
 
   return (
     <>
-      <Content onClick={handleOpenModal}>
-        <BiRepost />
-        <p>
+      <Content>
+        <BiRepost data-test="repost-btn" onClick={handleOpenModal} />
+        <p data-test="repost-counter">
           {repostCount}
           {' '}
           re-posts
