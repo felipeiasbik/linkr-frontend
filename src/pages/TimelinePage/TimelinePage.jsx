@@ -96,7 +96,8 @@ export default function TimelinePage() {
         },
       };
       try {
-        const offset = page * 20;
+        const offset = page * 10;
+        console.log(offset);
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts/?offset=${offset}`, config);
         if (postList) {
           const firstPostTimestamp = dayjs(data[0].repost_created_at).valueOf() || dayjs(data[0].created_at).valueOf();
@@ -123,6 +124,7 @@ export default function TimelinePage() {
       }
     }
   }
+  console.log(postList);
 
   useEffect(() => {
     getPosts();
@@ -191,13 +193,13 @@ export default function TimelinePage() {
               {!isLoading && postList && postList.length === 0 && (
                 <h3 data-test="message">There are no posts yet</h3>
               )}
-              {postList.length && (
-              <InfinityScroll
-                callback={handleAlterPage}
-                executeCallback={postList.length > 0}
-                makeNewRequest={makeNewRequest}
-              />
-              )}
+              {postList.length ? (
+                <InfinityScroll
+                  callback={handleAlterPage}
+                  executeCallback={postList.length > 0}
+                  makeNewRequest={makeNewRequest}
+                />
+              ) : ''}
             </Timeline>
           </PostsArea>
           {windowWidth && <Sidebar />}
