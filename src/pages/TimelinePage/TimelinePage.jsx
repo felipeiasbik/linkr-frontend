@@ -60,10 +60,18 @@ export default function TimelinePage() {
         try {
           const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
           const receivedPosts = data.filter(({ created_at: createdAt, user_id: userId, repost_created_at: repostCreated }) => {
-            const postTimestamp = repostCreated ? dayjs(repostCreated).valueOf() : dayjs(createdAt).valueOf();
-            const isNew = dayjs(postTimestamp).isAfter(lastUpdate);
-            return isNew;
+            const isRepost = Boolean(repostCreated);
+            const postTimestamp = isRepost ? dayjs(repostCreated).valueOf() : dayjs(createdAt).valueOf();
+            const isMine = userData.id === userId;
+            const isNew = postTimestamp > dayjs(lastUpdate).valueOf();
+            if (isNew) {
+              if (isMine && !isRepost) return false;
+              console.log({ postTimestamp, lastUpdate });
+              return true;
+            }
+            return false;
           });
+          console.log(receivedPosts);
           setNewPosts(receivedPosts);
         } catch (err) {
           console.log(err?.response?.data);
@@ -73,18 +81,15 @@ export default function TimelinePage() {
   }, 15000);
 
   function handleNewPosts() {
-    const currentDate = new Date(Date.now());
-    const timestamp = currentDate.getTime();
     const newList = newPosts.concat(postList);
+    const isRepost = Boolean(newList[0].repost_created_at);
+    setLastUpdate(isRepost ? newList[0].repost_created_at : newList[0].created_at);
     setPostList(newList);
     setNewPosts([]);
-    setLastUpdate(timestamp);
   }
 
   async function getPosts() {
     setIsLoading(true);
-    const currentDate = new Date(Date.now());
-    const timestamp = currentDate.getTime();
     const token = JSON.parse(localStorage.getItem('linkr_token'));
     if (userData) {
       const config = {
@@ -95,8 +100,8 @@ export default function TimelinePage() {
       };
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
-        setLastUpdate(timestamp);
-
+        const isRepost = Boolean(data[0].repost_created_at);
+        setLastUpdate(isRepost ? data[0].repost_created_at : data[0].created_at);
         if (postList) {
           const postId = data[0].id;
           const stopRequests = postList.find((post) => post.id === postId);
@@ -115,7 +120,6 @@ export default function TimelinePage() {
       }
     }
   }
-  console.log(postList);
   useEffect(() => {
     getPosts();
   }, [page, refresh]);
