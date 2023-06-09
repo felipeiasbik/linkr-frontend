@@ -8,6 +8,7 @@ import PostContainer from '../../components/PostContainer/PostContainer.jsx';
 import {
   Container, Title, Content, PostsArea, Timeline, FollowButton,
 } from './userPageStyle';
+import InfinityScroll from '../../hooks/infinityScroll.js';
 
 export default function TimelinePage() {
   const [postList, setPostList] = useState(null);
@@ -16,35 +17,10 @@ export default function TimelinePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [following, setFollowing] = useState();
   const [disabled, setDisabled] = useState(false);
+  const [page, setPage] = useState(0);
+  const [makeNewRequest, setMakeNewRequest] = useState(true);
   const { userData } = useContext(UserContext);
   const { id } = useParams();
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    setIsLoading(true);
-    const token = JSON.parse(localStorage.getItem('linkr_token'));
-    if (userData) {
-      const config = {
-        headers: {
-          userId: userData.id,
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      (async () => {
-        try {
-          const { data: userDataInfo } = await axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`, config);
-          const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts/user/${id}`, config);
-          setUserInfo(userDataInfo);
-          setPostList(data);
-          setFollowing(userDataInfo.followingUser);
-        } catch (err) {
-          console.log(err?.response?.data);
-        } finally {
-          setIsLoading(false);
-        }
-      })();
-    }
-  }, [pathname]);
 
   useEffect(() => {
     if (window.innerWidth > 768) {
@@ -91,10 +67,53 @@ export default function TimelinePage() {
         if (response.status === 200) setFollowing(true);
         return setDisabled(false);
       } catch (error) {
-        return alert('There was an unexpected error! on follow');
+        return alert('There was an unexpected error on follow');
       }
     }
     return true;
+  }
+
+  async function getUserPosts() {
+    setIsLoading(true);
+    const token = JSON.parse(localStorage.getItem('linkr_token'));
+    if (userData) {
+      const config = {
+        headers: {
+          userId: userData.id,
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      try {
+        const { data: userDataInfo } = await axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`, config);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts/user/${id}`, config);
+        setUserInfo(userDataInfo);
+        setFollowing(userDataInfo.followingUser);
+
+        if (postList) {
+          const postId = data[0].id;
+          const stopRequests = postList.find((post) => post.id === postId);
+          if (stopRequests) {
+            setMakeNewRequest(false);
+          } else {
+            setPostList([...postList, ...data]);
+          }
+        } else {
+          setPostList(data);
+        }
+      } catch (err) {
+        console.log(err?.response?.data);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  }
+
+  useEffect(() => {
+    getUserPosts();
+  }, [page]);
+
+  function handleAlterPage() {
+    setPage((prevState) => prevState + 1);
   }
 
   return (
@@ -106,7 +125,15 @@ export default function TimelinePage() {
             {userInfo && <img alt={userInfo?.name} src={userInfo?.photo} />}
             {userInfo && `${userInfo?.name} Post's` }
           </div>
-          {userInfo && userInfo.id !== userData.id && <FollowButton disabled={disabled} following={following} onClick={() => handleFollow(userInfo.id)}>{following ? 'Unfollow' : 'Follow'}</FollowButton>}
+          {userInfo && userInfo.id !== userData.id && (
+            <FollowButton
+              disabled={disabled}
+              following={following}
+              onClick={() => handleFollow(userInfo.id)}
+            >
+                {following ? 'Unfollow' : 'Follow'}
+            </FollowButton>
+          )}
         </Title>
         <Content>
           <PostsArea margin={windowWidth}>
@@ -122,13 +149,25 @@ export default function TimelinePage() {
               </h3>
               )}
 
-              {!isLoading && postList && postList.length > 0 && (
+              {postList && postList.length > 0 && (
                 postList?.map((item) => (
                   <PostContainer item={item} key={item.post_id} />
                 )))}
+
+              {isLoading && postList && postList.length > 0 && (
+                <h3>
+                  Loading posts...
+                </h3>
+              )}
+
               {!isLoading && postList && postList.length === 0 && (
                 <h3 data-test="message">There are no posts yet</h3>
               )}
+
+              <InfinityScroll
+                callback={handleAlterPage}
+                makeNewRequest={makeNewRequest}
+              />
             </Timeline>
           </PostsArea>
           {(windowWidth) && <Sidebar />}
