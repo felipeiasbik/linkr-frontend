@@ -16,7 +16,7 @@ import {
 import InfinityScroll from '../../hooks/infinityScroll.js';
 
 export default function TimelinePage() {
-  const [postList, setPostList] = useState(null);
+  const [postList, setPostList] = useState([]);
   const [windowWidth, setWindowWidth] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [newPosts, setNewPosts] = useState([]);
@@ -96,16 +96,22 @@ export default function TimelinePage() {
         },
       };
       try {
-        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
-        const isRepost = Boolean(data[0].repost_created_at);
-        setLastUpdate(isRepost ? data[0].repost_created_at : data[0].created_at);
+        const offset = page * 20;
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts/?offset=${offset}`, config);
         if (postList) {
-          const postId = data[0].id;
-          const stopRequests = postList.find((post) => post.id === postId);
+          const firstPostTimestamp = dayjs(data[0].repost_created_at).valueOf() || dayjs(data[0].created_at).valueOf();
+          const stopRequests = postList.some(({ created_at: createdAt, repost_created_at: repostCreated }) => {
+            const postTimestamp = dayjs(repostCreated).valueOf() || dayjs(createdAt).valueOf();
+            return postTimestamp === firstPostTimestamp;
+          });
           if (stopRequests) {
+            const differences = data.filter((item) => postList.some((post) => (
+              (item.repost_created_at || item.created_at) !== (post.repost_created_at || post.created_at)
+            )));
+            setPostList([...postList, ...differences]);
             setMakeNewRequest(false);
           } else {
-            setPostList([...postList, ...data]);
+            setPostList((prevState) => [...prevState, ...data]);
           }
         } else {
           setPostList(data);
@@ -125,7 +131,6 @@ export default function TimelinePage() {
   function handleAlterPage() {
     setPage((prevState) => prevState + 1);
   }
-
   async function refreshPosts() {
     setIsLoading(true);
     const token = JSON.parse(localStorage.getItem('linkr_token'));
@@ -138,8 +143,6 @@ export default function TimelinePage() {
       };
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
-        const isRepost = Boolean(data[0].repost_created_at);
-        setLastUpdate(isRepost ? data[0].repost_created_at : data[0].created_at);
         setPostList(data);
       } catch (err) {
         console.log(err?.response?.data);
@@ -188,10 +191,13 @@ export default function TimelinePage() {
               {!isLoading && postList && postList.length === 0 && (
                 <h3 data-test="message">There are no posts yet</h3>
               )}
+              {postList.length && (
               <InfinityScroll
                 callback={handleAlterPage}
+                executeCallback={postList.length > 0}
                 makeNewRequest={makeNewRequest}
               />
+              )}
             </Timeline>
           </PostsArea>
           {windowWidth && <Sidebar />}

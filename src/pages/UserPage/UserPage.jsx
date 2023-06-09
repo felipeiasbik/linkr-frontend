@@ -1,6 +1,7 @@
 import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
+import dayjs from 'dayjs';
 import { UserContext } from '../../context/userContext.jsx';
 import Header from '../../components/Header/Header.jsx';
 import Sidebar from '../../components/Sidebar/Sidebar.jsx';
@@ -17,7 +18,7 @@ export default function UserPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [following, setFollowing] = useState();
   const [disabled, setDisabled] = useState(false);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [makeNewRequest, setMakeNewRequest] = useState(true);
   const { userData } = useContext(UserContext);
   const { id } = useParams();
@@ -86,17 +87,25 @@ export default function UserPage() {
         },
       };
       try {
+        const offset = page * 20;
         const { data: userDataInfo } = await axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`, config);
-        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts/user/${id}`, config);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts/user/${id}/?offset=${offset}`, config);
         setUserInfo(userDataInfo);
         setFollowing(userDataInfo.followingUser);
         if (postList?.length && oldId === id) {
-          const postId = data[0].id;
-          const stopRequests = postList.find((post) => post.id === postId);
+          const firstPostTimestamp = dayjs(data[0]?.repost_created_at)?.valueOf() || dayjs(data[0]?.created_at)?.valueOf();
+          const stopRequests = data.length === 0 || postList.some(({ created_at: createdAt, repost_created_at: repostCreated }) => {
+            const postTimestamp = dayjs(repostCreated).valueOf() || dayjs(createdAt).valueOf();
+            return postTimestamp === firstPostTimestamp;
+          });
           if (stopRequests) {
+            const differences = data.filter((item) => postList.some((post) => (
+              (item.repost_created_at || item.created_at) !== (post.repost_created_at || post.created_at)
+            )));
+            setPostList([...postList, ...differences]);
             setMakeNewRequest(false);
           } else {
-            setPostList([...postList, ...data]);
+            setPostList((prevState) => [...prevState, ...data]);
           }
         } else {
           setPostList(data);
@@ -117,7 +126,6 @@ export default function UserPage() {
   function handleAlterPage() {
     setPage((prevState) => prevState + 1);
   }
-
   return (
     <>
       <Header />
@@ -145,31 +153,34 @@ export default function UserPage() {
                   Loading profile...
                 </h3>
               )}
-              {!postList?.length && !isLoading && (
+              {!postList.length && !isLoading && (
               <h3>
                 An error occured while trying to fetch the posts, please refresh the page
               </h3>
               )}
 
-              {postList?.length && postList.length > 0 && (
-                postList?.map((item, index) => (
+              {postList?.length && (
+                postList.map((item, index) => (
                   <PostContainer item={item} key={`${item.post_id}-${index}`} refresh={refresh} setRefresh={setRefresh} />
                 )))}
 
-              {isLoading && postList && postList.length > 0 && (
+              {isLoading && postList && postList.length && (
                 <h3>
                   Loading posts...
                 </h3>
               )}
 
-              {!isLoading && postList && postList.length === 0 && (
+              {!isLoading && postList && !postList.length && (
                 <h3 data-test="message">There are no posts yet</h3>
               )}
 
+              {postList.length && (
               <InfinityScroll
                 callback={handleAlterPage}
+                executeCallback={postList.length > 0}
                 makeNewRequest={makeNewRequest}
               />
+              )}
             </Timeline>
           </PostsArea>
           {(windowWidth) && <Sidebar />}

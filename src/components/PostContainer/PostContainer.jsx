@@ -72,7 +72,6 @@ export default function PostContainer({
           <RepostContent>
             <BiRepost />
             Re-posted by
-            {' '}
             <span>
               <LinkIds to={`/user/${repostUserId}`}>
                 {userData.id === repostUserId ? 'you' : repostUserName}
