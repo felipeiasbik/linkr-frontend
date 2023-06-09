@@ -42,6 +42,7 @@ export default function CreatePostArea({
       textAreaRef.current.value = '';
       setRefresh(!refresh);
     } catch (err) {
+      console.log(err);
       alert('There was an error while publishing your link.');
     } finally {
       setIsLoading(false);
