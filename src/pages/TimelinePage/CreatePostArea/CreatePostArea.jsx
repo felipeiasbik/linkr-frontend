@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { FormContainer, CreatePost, UserImage } from './createPostArea.js';
 
 export default function CreatePostArea({
-  userData, setRefresh, refresh,
+  userData, getPosts,
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef();
@@ -40,9 +40,8 @@ export default function CreatePostArea({
       await axios.post(`${process.env.REACT_APP_API_URL}/posts`, postObject, config);
       inputRef.current.value = '';
       textAreaRef.current.value = '';
-      setRefresh(!refresh);
+      getPosts();
     } catch (err) {
-      console.log(err);
       alert('There was an error while publishing your link.');
     } finally {
       setIsLoading(false);

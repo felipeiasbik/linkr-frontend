@@ -31,7 +31,6 @@ export default function EditDescription({
 
       axios.patch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, body, config)
         .then(() => {
-          alert('editado');
           setEditDesc(false);
           setDescState(description);
         })

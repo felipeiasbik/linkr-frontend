@@ -8,7 +8,7 @@ import LoaderSpinner from '../LoaderSpinner/LoaderSpinner';
 import { UserContext } from '../../../context/userContext';
 
 export default function OptionsContainer({
-  userId, waiting, setWaiting, postId, refresh, setRefresh, editDesc, setEditDesc, repostUserId,
+  userId, waiting, setWaiting, postId, getPosts, editDesc, setEditDesc, repostUserId,
 }) {
   const { userData } = useContext(UserContext);
   const token = JSON.parse(localStorage.getItem('linkr_token'));
@@ -23,7 +23,7 @@ export default function OptionsContainer({
       .then(() => {
         setWaiting(false);
         setModalOpen(false);
-        setRefresh(!refresh);
+        getPosts();
       })
       .catch((err) => {
         alert('Oops, something went wrong. The post was not deleted.');

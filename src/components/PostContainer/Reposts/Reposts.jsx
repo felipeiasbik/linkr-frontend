@@ -9,7 +9,7 @@ import {
 import { UserContext } from '../../../context/userContext.jsx';
 
 export default function Reposts({
-  postId, repostCount, waiting, setWaiting, refresh, setRefresh,
+  postId, repostCount, waiting, setWaiting, getPosts,
 }) {
   const { userData } = useContext(UserContext);
   const token = JSON.parse(localStorage.getItem('linkr_token'));
@@ -25,7 +25,7 @@ export default function Reposts({
       .then(() => {
         setWaiting(false);
         setModalOpen(false);
-        setRefresh(!refresh);
+        getPosts();
       })
       .catch((err) => {
         alert(err.message);

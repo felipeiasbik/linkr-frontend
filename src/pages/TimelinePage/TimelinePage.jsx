@@ -19,7 +19,6 @@ export default function TimelinePage() {
   const [postList, setPostList] = useState(null);
   const [windowWidth, setWindowWidth] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [refresh, setRefresh] = useState();
   const [newPosts, setNewPosts] = useState([]);
   const [lastUpdate, setLastUpdate] = useState();
   const [page, setPage] = useState(0);
@@ -66,12 +65,10 @@ export default function TimelinePage() {
             const isNew = postTimestamp > dayjs(lastUpdate).valueOf();
             if (isNew) {
               if (isMine && !isRepost) return false;
-              console.log({ postTimestamp, lastUpdate });
               return true;
             }
             return false;
           });
-          console.log(receivedPosts);
           setNewPosts(receivedPosts);
         } catch (err) {
           console.log(err?.response?.data);
@@ -120,14 +117,37 @@ export default function TimelinePage() {
       }
     }
   }
+
   useEffect(() => {
     getPosts();
-  }, [page, refresh]);
+  }, [page]);
 
   function handleAlterPage() {
     setPage((prevState) => prevState + 1);
   }
 
+  async function refreshPosts() {
+    setIsLoading(true);
+    const token = JSON.parse(localStorage.getItem('linkr_token'));
+    if (userData) {
+      const config = {
+        headers: {
+          userId: userData.id,
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      try {
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
+        const isRepost = Boolean(data[0].repost_created_at);
+        setLastUpdate(isRepost ? data[0].repost_created_at : data[0].created_at);
+        setPostList(data);
+      } catch (err) {
+        console.log(err?.response?.data);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  }
   return (
     <>
       <Header />
@@ -137,8 +157,7 @@ export default function TimelinePage() {
           <PostsArea margin={windowWidth}>
             <CreatePostArea
               userData={userData}
-              refresh={refresh}
-              setRefresh={setRefresh}
+              getPosts={refreshPosts}
             />
             <Timeline>
 
@@ -158,8 +177,7 @@ export default function TimelinePage() {
                   <PostContainer
                     item={item}
                     key={`${item.id}-${index}`}
-                    refresh={refresh}
-                    setRefresh={setRefresh}
+                    getPosts={refreshPosts}
                   />
                 )))}
               {isLoading && (

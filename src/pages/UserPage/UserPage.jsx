@@ -10,8 +10,8 @@ import {
 } from './userPageStyle';
 import InfinityScroll from '../../hooks/infinityScroll.js';
 
-export default function TimelinePage() {
-  const [postList, setPostList] = useState(null);
+export default function UserPage() {
+  const [postList, setPostList] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
   const [windowWidth, setWindowWidth] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,6 +22,7 @@ export default function TimelinePage() {
   const { userData } = useContext(UserContext);
   const { id } = useParams();
   const [refresh, setRefresh] = useState(false);
+  const [oldId, setOldId] = useState(id);
 
   useEffect(() => {
     if (window.innerWidth > 768) {
@@ -89,8 +90,7 @@ export default function TimelinePage() {
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts/user/${id}`, config);
         setUserInfo(userDataInfo);
         setFollowing(userDataInfo.followingUser);
-
-        if (postList) {
+        if (postList?.length && oldId === id) {
           const postId = data[0].id;
           const stopRequests = postList.find((post) => post.id === postId);
           if (stopRequests) {
@@ -111,7 +111,8 @@ export default function TimelinePage() {
 
   useEffect(() => {
     getUserPosts();
-  }, [page]);
+    setOldId(id);
+  }, [page, id]);
 
   function handleAlterPage() {
     setPage((prevState) => prevState + 1);
@@ -144,15 +145,15 @@ export default function TimelinePage() {
                   Loading profile...
                 </h3>
               )}
-              {!postList && !isLoading && (
+              {!postList?.length && !isLoading && (
               <h3>
                 An error occured while trying to fetch the posts, please refresh the page
               </h3>
               )}
 
-              {postList && postList.length > 0 && (
-                postList?.map((item) => (
-                  <PostContainer item={item} key={item.post_id} refresh={refresh} setRefresh={setRefresh} />
+              {postList?.length && postList.length > 0 && (
+                postList?.map((item, index) => (
+                  <PostContainer item={item} key={`${item.post_id}-${index}`} refresh={refresh} setRefresh={setRefresh} />
                 )))}
 
               {isLoading && postList && postList.length > 0 && (
