@@ -18,7 +18,7 @@ export default function UserPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [following, setFollowing] = useState();
   const [disabled, setDisabled] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [makeNewRequest, setMakeNewRequest] = useState(true);
   const { userData } = useContext(UserContext);
   const { id } = useParams();
@@ -87,7 +87,7 @@ export default function UserPage() {
         },
       };
       try {
-        const offset = page * 20;
+        const offset = page * 10;
         const { data: userDataInfo } = await axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`, config);
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts/user/${id}/?offset=${offset}`, config);
         setUserInfo(userDataInfo);
@@ -123,9 +123,17 @@ export default function UserPage() {
     setOldId(id);
   }, [page, id]);
 
+  useEffect(() => {
+    setPage(0);
+    window.scrollTo(0, 0);
+  }, [id]);
+
   function handleAlterPage() {
     setPage((prevState) => prevState + 1);
   }
+
+  console.log(page);
+  console.log(postList);
   return (
     <>
       <Header />
@@ -153,34 +161,34 @@ export default function UserPage() {
                   Loading profile...
                 </h3>
               )}
-              {!postList.length && !isLoading && (
+              {!postList && !isLoading && (
               <h3>
                 An error occured while trying to fetch the posts, please refresh the page
               </h3>
               )}
 
-              {postList?.length && (
+              {postList?.length ? (
                 postList.map((item, index) => (
                   <PostContainer item={item} key={`${item.post_id}-${index}`} refresh={refresh} setRefresh={setRefresh} />
-                )))}
+                ))) : ''}
 
-              {isLoading && postList && postList.length && (
+              {(isLoading && postList && postList.length) ? (
                 <h3>
                   Loading posts...
                 </h3>
-              )}
+              ) : ''}
 
-              {!isLoading && postList && !postList.length && (
+              {(!isLoading && postList && !postList.length) && (
                 <h3 data-test="message">There are no posts yet</h3>
               )}
 
-              {postList.length && (
-              <InfinityScroll
-                callback={handleAlterPage}
-                executeCallback={postList.length > 0}
-                makeNewRequest={makeNewRequest}
-              />
-              )}
+              {(postList.length >= 10 && !isLoading) ? (
+                <InfinityScroll
+                  callback={handleAlterPage}
+                  executeCallback={postList.length > 0}
+                  makeNewRequest={makeNewRequest}
+                />
+              ) : postList.length > 0 && <h3 data-test="message">No more posts...</h3>}
             </Timeline>
           </PostsArea>
           {(windowWidth) && <Sidebar />}
