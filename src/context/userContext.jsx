@@ -17,14 +17,15 @@ export function UserProvider({ children }) {
         id,
         name,
         photo,
+        followingsCount,
       } = jwtDecode(token);
-
       setUserData({
         email,
         id,
         name,
         photo,
         token,
+        followingsCount,
       });
     }
   }

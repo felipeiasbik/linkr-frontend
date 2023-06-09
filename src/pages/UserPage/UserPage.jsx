@@ -182,7 +182,7 @@ export default function UserPage() {
                 <h3 data-test="message">There are no posts yet</h3>
               )}
 
-              {(postList.length >= 10 && !isLoading) ? (
+              {(postList.length >= 10 && !isLoading && !makeNewRequest) ? (
                 <InfinityScroll
                   callback={handleAlterPage}
                   executeCallback={postList.length > 0}

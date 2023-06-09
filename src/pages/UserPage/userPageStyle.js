@@ -73,6 +73,8 @@ export const FollowButton = styled.button`
   color: ${({ following }) => (following ? colors.submitButton : colors.neutral)};
   border-radius: 5px;
   transition: all .3s;
+  cursor: pointer;
+  
   :hover{
     background: ${({ following }) => (following ? colors.submitButton : colors.neutral)};
     color: ${({ following }) => (following ? colors.neutral : colors.submitButton)};
