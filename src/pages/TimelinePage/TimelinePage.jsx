@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable max-len, no-trailing-spaces, no-multiple-empty-lines */
 import axios from 'axios';
 import {
   useEffect, useState, useContext, useRef,
@@ -24,7 +24,7 @@ export default function TimelinePage() {
   const [page, setPage] = useState(0);
   const [makeNewRequest, setMakeNewRequest] = useState(true);
   const { userData } = useContext(UserContext);
-
+  const [followings, setFollowings] = useState(null);
   useEffect(() => {
     if (window.innerWidth > 768) {
       setWindowWidth(true);
@@ -97,7 +97,6 @@ export default function TimelinePage() {
       };
       try {
         const offset = page * 10;
-        console.log(offset);
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts/?offset=${offset}`, config);
         if (postList) {
           const firstPostTimestamp = dayjs(data[0].repost_created_at).valueOf() || dayjs(data[0].created_at).valueOf();
@@ -124,8 +123,25 @@ export default function TimelinePage() {
       }
     }
   }
-
+  async function getFollowings() {
+    try {
+      if (userData) {
+        const token = JSON.parse(localStorage.getItem('linkr_token'));
+        const config = {
+          headers: {
+            userId: userData.id,
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const data = await axios.get('/follow', config);
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
+    getFollowings();
     getPosts();
   }, [page]);
 
