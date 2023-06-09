@@ -172,7 +172,7 @@ export default function TimelinePage() {
       }
     }
   }
-
+  console.log(postList.length >= 10 && !isLoading && !makeNewRequest);
   return (
     <>
       <Header />
@@ -218,13 +218,13 @@ export default function TimelinePage() {
                 ? <h3 data-test="message">There are no posts yet</h3>
                 : (postList.length === 0 && !isLoading && followings < 1) && <h3 data-test="message">{'You don\'t follow anyone yet. Search for new friends!'}</h3>}
 
-              {(postList.length >= 10 && !isLoading && !makeNewRequest) ? (
+              {(postList.length >= 10 && !isLoading) ? (
                 <InfinityScroll
                   callback={handleAlterPage}
                   executeCallback={postList.length > 0}
                   makeNewRequest={makeNewRequest}
                 />
-              ) : postList.length > 0 && <h3 data-test="message">No more posts...</h3>}
+              ) : (postList.length > 0 && !isLoading) && <h3 data-test="message">No more posts...</h3>}
             </Timeline>
           </PostsArea>
           {windowWidth && <Sidebar />}
