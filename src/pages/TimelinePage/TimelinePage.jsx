@@ -25,6 +25,7 @@ export default function TimelinePage() {
   const [makeNewRequest, setMakeNewRequest] = useState(true);
   const { userData } = useContext(UserContext);
   const [followings, setFollowings] = useState(null);
+
   useEffect(() => {
     if (window.innerWidth > 768) {
       setWindowWidth(true);
@@ -123,6 +124,7 @@ export default function TimelinePage() {
       }
     }
   }
+
   async function getFollowings() {
     try {
       if (userData) {
@@ -133,13 +135,14 @@ export default function TimelinePage() {
             Authorization: `Bearer ${token}`,
           },
         };
-        const data = await axios.get('/follow', config);
-        console.log(data);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/follow`, config);
+        setFollowings(data.followingsCount);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err?.response?.data);
     }
   }
+
   useEffect(() => {
     getFollowings();
     getPosts();
@@ -208,10 +211,12 @@ export default function TimelinePage() {
                   Loading posts...
                 </h3>
               )}
-
+              {!isLoading && postList && postList.length === 0 && followings > 0 && (
+                <h3 data-test="message">No posts found from your friends</h3>
+              )}
               {(!isLoading && postList) && (postList.length === 0 && userData.followingsCount)
                 ? <h3 data-test="message">There are no posts yet</h3>
-                : (postList.length === 0 && !isLoading) && <h3 data-test="message">{'You don\'t follow anyone yet. Search for new friends!'}</h3>}
+                : (postList.length === 0 && !isLoading && followings < 1) && <h3 data-test="message">{'You don\'t follow anyone yet. Search for new friends!'}</h3>}
 
               {(postList.length >= 10 && !isLoading && !makeNewRequest) ? (
                 <InfinityScroll
