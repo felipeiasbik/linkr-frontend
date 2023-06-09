@@ -95,8 +95,9 @@ export default function TimelinePage() {
   function handleNewPosts() {
     const currentDate = new Date(Date.now());
     const timestamp = currentDate.getTime();
+    const newList = newPosts.concat(postList);
+    setPostList(newList);
     setNewPosts([]);
-    setRefresh(!refresh);
     setLastUpdate(timestamp);
   }
   return (
@@ -128,7 +129,7 @@ export default function TimelinePage() {
                 postList?.map((item, index) => (
                   <PostContainer
                     item={item}
-                    key={index}
+                    key={`${item.id}-${index}`}
                     refresh={refresh}
                     setRefresh={setRefresh}
                   />
