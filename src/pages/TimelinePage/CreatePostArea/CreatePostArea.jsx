@@ -1,17 +1,25 @@
+import { setRef } from '@mui/material';
 import axios from 'axios';
 import { useRef, useState } from 'react';
 import { FormContainer, CreatePost, UserImage } from './createPostArea.js';
 
-export default function CreatePostArea({ userData, refresh, setRefresh }) {
+export default function CreatePostArea({
+  userData, getPosts,
+}) {
   const [isLoading, setIsLoading] = useState(false);
-  const formRef = useRef({});
+  const inputRef = useRef();
+  const textAreaRef = useRef();
 
   async function handleSendPost(e) {
     e.preventDefault();
     setIsLoading(true);
-    formRef.current.createdAt = Date.now();
+    const postObject = {
+      url: inputRef.current.url,
+      description: textAreaRef.current.value,
+      createdAt: Date.now(),
+    };
 
-    if (!formRef.current.url) {
+    if (!postObject.url) {
       setTimeout(() => {
         setIsLoading(false);
         alert('Enter a valid URL');
@@ -19,24 +27,33 @@ export default function CreatePostArea({ userData, refresh, setRefresh }) {
       return;
     }
 
-    if (!formRef.current.description) {
-      delete formRef.current.description;
+    if (!postObject.description) {
+      delete postObject.description;
     }
     const token = JSON.parse(localStorage.getItem('linkr_token'));
 
     const config = {
       headers: { userId: userData.id, Authorization: `Bearer ${token}` },
     };
+
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/posts`, formRef.current, config);
-      formRef.current.url = '';
-      formRef.current.description = '';
+      await axios.post(`${process.env.REACT_APP_API_URL}/posts`, postObject, config);
+      inputRef.current.value = '';
+      textAreaRef.current.value = '';
+      getPosts();
     } catch (err) {
       alert('There was an error while publishing your link.');
     } finally {
       setIsLoading(false);
-      setRefresh(!refresh);
     }
+  }
+
+  function handleChangeInput(value) {
+    inputRef.current.url = value;
+  }
+
+  function handleChangeTextArea(value) {
+    textAreaRef.current.description = value;
   }
 
   return (
@@ -51,15 +68,15 @@ export default function CreatePostArea({ userData, refresh, setRefresh }) {
         <input
           type="url"
           placeholder="Enter URL"
-          onChange={(e) => formRef.current.url = e.target.value}
-          value={formRef.current.url}
+          onChange={(e) => handleChangeInput(e.target.value)}
+          ref={inputRef}
           disabled={isLoading}
           data-test="link"
         />
         <textarea
           placeholder="Post description."
-          onChange={(e) => formRef.current.description = e.target.value}
-          value={formRef.current.description}
+          onChange={(e) => handleChangeTextArea(e.target.value)}
+          ref={textAreaRef}
           disabled={isLoading}
           data-test="description"
         />

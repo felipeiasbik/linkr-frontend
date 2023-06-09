@@ -17,7 +17,7 @@ export default function EditDescription({
     setValue('edit', value);
     setFocus('edit');
   }, []);
-  function evento(event) {
+  function handleKeys(event) {
     if (event.key === 'Escape') {
       setEditDesc(false);
     }
@@ -28,19 +28,20 @@ export default function EditDescription({
       const description = getValues('edit');
       const body = { description };
       setWaiting(true);
-      console.log(body);
+
       axios.patch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, body, config)
         .then(() => {
-          alert('editado');
-          setWaiting(false);
           setEditDesc(false);
           setDescState(description);
         })
         .catch((err) => {
-          console.log(err);
           setWaiting(false);
           setEditDesc(false);
-        });
+          setValue('edit', description);
+          setFocus('edit');
+          alert(err.response.data.message);
+        })
+        .finally(() => setWaiting(false));
     }
   }
   return (
@@ -48,7 +49,7 @@ export default function EditDescription({
       type="text"
       {...register('edit')}
       disabled={waiting}
-      onKeyDown={evento}
+      onKeyDown={handleKeys}
       data-test="edit-input"
     />
   );

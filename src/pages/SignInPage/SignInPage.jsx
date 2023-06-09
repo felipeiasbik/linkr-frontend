@@ -2,10 +2,9 @@
 
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
-
 import {
   SignInContainer,
   SignInForm,
@@ -91,7 +90,9 @@ export default function SignInPage() {
             data-test="password"
           />
           <SignInButton disabled={disabled} data-test="login-btn">Log In</SignInButton>
-          <SwitchButton disabled={disabled} onClick={() => navigate('/sign-up')} type="button" data-test="sign-up-link">First time? Create an account!</SwitchButton>
+          <SwitchButton data-test="sign-up-link">
+            <Link to="/sign-up">First time? Create an account!</Link>
+          </SwitchButton>
         </SignInForm>
       </SignInContainer>
     </>

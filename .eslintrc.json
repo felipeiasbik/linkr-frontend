@@ -34,6 +34,7 @@
         "react/no-array-index-key": "off",
         "no-return-assign": "off",
         "jsx-a11y/no-noninteractive-element-interactions": "off",
-        "react/jsx-props-no-spreading" : "off"
+        "react/jsx-props-no-spreading" : "off",
+        "max-len":"off"
     }
 }

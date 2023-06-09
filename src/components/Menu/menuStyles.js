@@ -20,7 +20,7 @@ export const ModalBox = styled(ReactModal)`
 
 export const MenuContainer = styled.div`
   animation: ${fadeIn} .5s ease-in;
-  height: 47px;
+  height: 70px;
   width: 180px;
   position: fixed;
   right: 0;
@@ -30,10 +30,28 @@ export const MenuContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   z-index: 10;
+  gap: 10px;
 `;
 
 export const LogoutButton = styled.button`
+  background-color: transparent;
+  color: ${colors.neutral};
+  font-family: ${fonts.main};
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  border: none;
+  cursor: pointer;
+  &:hover{
+    color: lightgray;
+  }
+`;
+
+export const ProfileButton = styled.button`
   background-color: transparent;
   color: ${colors.neutral};
   font-family: ${fonts.main};

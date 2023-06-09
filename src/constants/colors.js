@@ -10,6 +10,13 @@ const colors = {
   description: '#B7B7B7',
   search: '#515151',
   resultSearch: '#E7E7E7',
+  following: '#C5C5C5',
+  reposts: '#1E1E1E',
+  commentaryName: '#F3F3F3',
+  comment: '#ACACAC',
+  commentFollowing: '#565656',
+  commentBackground: '#1E1E1E',
+  commentInput: '#252525',
 };
 
 export default colors;
