@@ -43,7 +43,10 @@ button{
 }
 svg{
   font-size: 14px;
-  color: white;
+  color: ${colors.neutral};
+}
+svg:hover{
+  color: ${colors.submitButton};
 }
 }
 `;

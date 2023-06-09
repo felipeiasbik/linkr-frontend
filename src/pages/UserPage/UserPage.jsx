@@ -16,6 +16,7 @@ export default function TimelinePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [following, setFollowing] = useState();
   const [disabled, setDisabled] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   const { userData } = useContext(UserContext);
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -44,7 +45,7 @@ export default function TimelinePage() {
         }
       })();
     }
-  }, [pathname]);
+  }, [pathname, refresh]);
 
   useEffect(() => {
     if (window.innerWidth > 768) {
@@ -124,7 +125,7 @@ export default function TimelinePage() {
 
               {!isLoading && postList && postList.length > 0 && (
                 postList?.map((item) => (
-                  <PostContainer item={item} key={item.post_id} />
+                  <PostContainer item={item} key={item.post_id} refresh={refresh} setRefresh={setRefresh} />
                 )))}
               {!isLoading && postList && postList.length === 0 && (
                 <h3 data-test="message">There are no posts yet</h3>
