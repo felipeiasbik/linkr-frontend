@@ -62,8 +62,7 @@ export default function TimelinePage() {
           const receivedPosts = data.filter(({ created_at: createdAt, user_id: userId, repost_created_at: repostCreated }) => {
             const postTimestamp = repostCreated ? dayjs(repostCreated).valueOf() : dayjs(createdAt).valueOf();
             const isNew = dayjs(postTimestamp).isAfter(lastUpdate);
-            const isMine = userId === userData.id;
-            return isNew && !isMine;
+            return isNew;
           });
           setNewPosts(receivedPosts);
         } catch (err) {
@@ -76,7 +75,8 @@ export default function TimelinePage() {
   function handleNewPosts() {
     const currentDate = new Date(Date.now());
     const timestamp = currentDate.getTime();
-    setPostList([...newPosts, ...postList]);
+    const newList = newPosts.concat(postList);
+    setPostList(newList);
     setNewPosts([]);
     setLastUpdate(timestamp);
   }
@@ -153,7 +153,7 @@ export default function TimelinePage() {
                 postList?.map((item, index) => (
                   <PostContainer
                     item={item}
-                    key={index}
+                    key={`${item.id}-${index}`}
                     refresh={refresh}
                     setRefresh={setRefresh}
                   />

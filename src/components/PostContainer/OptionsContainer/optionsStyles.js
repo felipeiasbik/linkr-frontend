@@ -1,9 +1,10 @@
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import fonts from '../../../constants/fonts';
+import colors from '../../../constants/colors';
 
 export const IconsContainer = styled.div`
-display: ${({ userLogged, owner }) => (userLogged === owner ? 'flex' : 'none')};
+display: ${({ userLogged, owner, repostUserId }) => (!repostUserId && userLogged === owner ? 'flex' : 'none')};
 position:absolute;
 top:10px;
 right: 10px;
@@ -11,6 +12,10 @@ svg{
   margin:5px;
   font-size: 16px;
   color: #ffffff;
+  cursor: pointer;
+}
+svg:hover{
+  color: ${colors.submitButton};
 }
 `;
 

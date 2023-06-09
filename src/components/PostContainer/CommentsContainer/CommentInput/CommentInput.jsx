@@ -5,7 +5,7 @@ import { InputContainer } from './inpuStyles';
 import { UserContext } from '../../../../context/userContext';
 
 export default function CommentInput({
-  photo, postId, refresh, setRefresh, comments, setComments,
+  photo, postId, refresh, setRefresh,
 }) {
   const [form, setForm] = useState({ comment: '' });
   const [waiting, setWaiting] = useState(false);
@@ -21,10 +21,9 @@ export default function CommentInput({
       headers: { userId: userData.id, Authorization: `Bearer ${token}` },
     };
     const body = { description: form.comment };
+    setForm({ comment: '' });
     axios.post(`${process.env.REACT_APP_API_URL}/comments/posts/${postId}`, body, config)
       .then(() => {
-        setForm({ comment: '' });
-        setComments(Number(comments) + 1);
         setRefresh(!refresh);
       })
       .catch((err) => {

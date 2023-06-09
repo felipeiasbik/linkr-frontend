@@ -67,8 +67,8 @@ export default function LikesContainer({
     <Content like={liked?.toString()}>
       {
           liked
-            ? <AiFillHeart data-test="like-btn" onClick={() => unlikePost(postId)} />
-            : <AiOutlineHeart data-test="like-btn" onClick={() => likePost(postId)} />
+            ? <AiFillHeart data-test="like-btn" disbled={waiting.toString()} onClick={() => unlikePost(postId)} />
+            : <AiOutlineHeart data-test="like-btn" disbled={waiting.toString()} onClick={() => likePost(postId)} />
         }
       <p
         data-test="counter"

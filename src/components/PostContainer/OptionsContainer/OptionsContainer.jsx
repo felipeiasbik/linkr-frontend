@@ -8,7 +8,7 @@ import LoaderSpinner from '../LoaderSpinner/LoaderSpinner';
 import { UserContext } from '../../../context/userContext';
 
 export default function OptionsContainer({
-  userId, waiting, setWaiting, postId, refresh, setRefresh, editDesc, setEditDesc,
+  userId, waiting, setWaiting, postId, refresh, setRefresh, editDesc, setEditDesc, repostUserId,
 }) {
   const { userData } = useContext(UserContext);
   const token = JSON.parse(localStorage.getItem('linkr_token'));
@@ -43,7 +43,7 @@ export default function OptionsContainer({
 
   return (
     <>
-      <IconsContainer userLogged={userData.id} owner={userId}>
+      <IconsContainer userLogged={userData.id} owner={userId} repostUserId={repostUserId}>
         <AiOutlineEdit data-test="edit-btn" onClick={editPost} />
         <AiFillDelete data-test="delete-btn" onClick={handleOpenModal} />
       </IconsContainer>

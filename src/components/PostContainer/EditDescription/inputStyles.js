@@ -3,7 +3,7 @@ import colors from '../../../constants/colors.js';
 import fonts from '../../../constants/fonts.js';
 
 export const EditInput = styled.input`
-  max-width: 490px;
+  width: 100%;
   height: 44px;
   border-radius: 11px;
   padding: 12px;
@@ -20,5 +20,8 @@ export const EditInput = styled.input`
   }
   &::placeholder{
     color: ${colors.placeholder};
+  }
+  &:focus{
+    outline:none
   }
 `;

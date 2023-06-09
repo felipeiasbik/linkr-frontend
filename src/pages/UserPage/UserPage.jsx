@@ -21,6 +21,7 @@ export default function TimelinePage() {
   const [makeNewRequest, setMakeNewRequest] = useState(true);
   const { userData } = useContext(UserContext);
   const { id } = useParams();
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     if (window.innerWidth > 768) {
@@ -151,7 +152,7 @@ export default function TimelinePage() {
 
               {postList && postList.length > 0 && (
                 postList?.map((item) => (
-                  <PostContainer item={item} key={item.post_id} />
+                  <PostContainer item={item} key={item.post_id} refresh={refresh} setRefresh={setRefresh} />
                 )))}
 
               {isLoading && postList && postList.length > 0 && (

@@ -90,6 +90,7 @@ export default function PostContainer({
           setRefresh={setRefresh}
           editDesc={editDesc}
           setEditDesc={setEditDesc}
+          repostUserId={repostUserId}
         />
         <InfoLeft>
           <Link to={`/user/${item.user_id}`}>
@@ -128,7 +129,7 @@ export default function PostContainer({
           {
           !editDesc
             ? (
-              <p>
+              <p data-test="description">
                 {reactStringReplace(descState, /(#\w+)/g, (match, i) => (
                   <LinkIds
                     to={`/hashtag/${match.slice(1)}`}

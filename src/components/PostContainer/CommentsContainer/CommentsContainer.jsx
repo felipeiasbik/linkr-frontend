@@ -1,4 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import {
+  useContext, useEffect, useState,
+} from 'react';
 import axios from 'axios';
 import CircleLoader from '../LoaderSpinner/CircleLoader';
 import {
@@ -24,13 +26,11 @@ export default function CommentsContainer({
     if (showComments) {
       axios.get(`${process.env.REACT_APP_API_URL}/comments/posts/${postId}`, config)
         .then((response) => {
-          console.log(response.data);
           if (response.data.length === 0) {
             setMessage(true);
-          }
+          } else setMessage(false);
           setComments(response.data.length);
           setData(response.data);
-          setMessage(false);
         })
         .catch((err) => {
           alert(err.response.data.message);
@@ -53,8 +53,6 @@ export default function CommentsContainer({
           postId={postId}
           refresh={refresh}
           setRefresh={setRefresh}
-          comments={comments}
-          setComments={setComments}
         />
       </CommentsBox>
     </BackContainer>
