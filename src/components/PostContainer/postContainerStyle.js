@@ -105,7 +105,7 @@ width: 70px;
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 17px 17px 17px 34px;
+justify-content: center;
 img {
   width: 50px;
   height: 50px;
@@ -113,8 +113,7 @@ img {
   border-radius: 50%;
 }
 @media (max-width: 768px){
-width: 100%;
-padding: 15px;
+width: 20%;
 img {
     width: 40px;
     height: 40px;
@@ -145,8 +144,7 @@ line-height: 20px;
 color: ${colors.description};
 }
 @media (max-width: 768px){
-    width: 100%;
-    padding: 17px 17px 17px 0px;
+    width: 80%;
 }
 `;
 export const Articles = styled.div`
@@ -158,12 +156,12 @@ height: 155px;
 border: 1px solid #4D4D4D;
 border-radius: 11px;
 color: ${colors.description};
+
 @media (max-width: 768px){
-    width: 272px;
+    width: 95%;
     height: 115px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
 }
 `;
 

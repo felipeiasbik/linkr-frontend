@@ -86,16 +86,15 @@ export const SwitchButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family:${fonts.main};
-  font-style: normal;
-  font-weight: 400;
-  font-size: 17px;
-  line-height: 20px;
   width: 80%;
   height: 65px;
-  background-color: ${colors.main};
-  text-decoration: underline;
   a{
+    background-color: ${colors.main};
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;font-family:${fonts.main};
+    text-decoration: underline;
     &:visited{
       color: ${colors.neutral};
     }

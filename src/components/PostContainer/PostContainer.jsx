@@ -19,7 +19,7 @@ import CommentsContainer from './CommentsContainer/CommentsContainer.jsx';
 import Reposts from './Reposts/Reposts.jsx';
 
 export default function PostContainer({
-  item, handleLinkClick, getPosts,
+  item, getPosts,
 }) {
   const {
     post_id: postId,
@@ -131,7 +131,6 @@ export default function PostContainer({
                   <LinkIds
                     to={`/hashtag/${match.slice(1)}`}
                     key={i}
-                    onClick={() => handleLinkClick(match)}
                   >
                     <span>{match}</span>
                   </LinkIds>
