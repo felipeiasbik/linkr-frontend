@@ -172,7 +172,6 @@ export default function TimelinePage() {
       }
     }
   }
-  console.log(postList.length >= 10 && !isLoading && !makeNewRequest);
   return (
     <>
       <Header />
@@ -216,7 +215,7 @@ export default function TimelinePage() {
               )}
               {(!isLoading && postList) && (postList.length === 0 && userData.followingsCount)
                 ? <h3 data-test="message">There are no posts yet</h3>
-                : (postList.length === 0 && !isLoading && followings < 1) && <h3 data-test="message">{'You don\'t follow anyone yet. Search for new friends!'}</h3>}
+                : (postList.length === 0 && !isLoading && (followings < 1 || !followings)) && <h3 data-test="message">{'You don\'t follow anyone yet. Search for new friends!'}</h3>}
 
               {(postList.length >= 10 && !isLoading) ? (
                 <InfinityScroll
