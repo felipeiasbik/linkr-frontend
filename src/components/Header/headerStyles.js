@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { IoIosArrowDown } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 import fonts from '../../constants/fonts.js';
 import colors from '../../constants/colors.js';
 
@@ -26,7 +27,7 @@ export const SearchBarContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const HeaderLogo = styled.h1`
+export const HeaderLogo = styled(Link)`
   font-family: ${fonts.logo};
   font-style: normal;
   font-weight: 700;
@@ -35,6 +36,7 @@ export const HeaderLogo = styled.h1`
   letter-spacing: 0.05em;
   color: ${colors.neutral};
   cursor: pointer;
+  text-decoration: none;
 `;
 
 export const SearchBar = styled.div`
