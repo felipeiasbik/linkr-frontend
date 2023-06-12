@@ -59,13 +59,15 @@ export default function TimelinePage() {
       (async () => {
         try {
           const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/posts`, config);
-          const receivedPosts = data.filter(({ created_at: createdAt, user_id: userId, repost_created_at: repostCreated }) => {
+          const receivedPosts = data.filter(({
+            created_at: createdAt, user_id: userId, repost_created_at: repostCreated, repost_user_id: repostUser, 
+          }) => {
             const isRepost = Boolean(repostCreated);
             const postTimestamp = isRepost ? repostCreated : createdAt;
-            const isMine = userData.id === userId;
+            const isMine = isRepost ? repostUser === userData.id : userData.id === userId;
             const isNew = new Date(postTimestamp).getTime() > new Date(lastUpdate).getTime();
             if (isNew) {
-              if (isMine && !isRepost) return false;
+              if (isMine) return false;
               return true;
             }
             return false;
@@ -153,7 +155,7 @@ export default function TimelinePage() {
       const isRepost = Boolean(postList[0].repost_created_at);
       setLastUpdate(isRepost ? postList[0].repost_created_at : postList[0].created_at);
     }
-  }, []);
+  }, [postList]);
 
   function handleAlterPage() {
     setPage((prevState) => prevState + 1);

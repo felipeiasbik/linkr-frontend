@@ -38,7 +38,7 @@ export default function Header() {
 
   return (
     <HeaderContainer>
-      <HeaderLogo onClick={() => navigate('/timeline')}>linkr</HeaderLogo>
+      <HeaderLogo to="/timeline">linkr</HeaderLogo>
       <SearchBar>
         <Searchinput />
       </SearchBar>
