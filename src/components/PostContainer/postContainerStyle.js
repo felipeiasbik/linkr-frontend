@@ -105,7 +105,7 @@ width: 70px;
 display: flex;
 flex-direction: column;
 align-items: center;
-justify-content: center;
+padding: 17px 17px 17px 34px;
 img {
   width: 50px;
   height: 50px;
