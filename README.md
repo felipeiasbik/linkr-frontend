@@ -29,6 +29,20 @@ Para ver como ficou o projeto, basta acessar o link abaixo:
 
 Vale a ressalva de que o acesso pode ser um pouco lento devido ao backend estar hospedado em uma plataforma gratuita. Mas tenha paciência :)
 
+### Como utilizar:
+- Clone o repositório
+- Digite o seguinte comando na raíz do projeto:
+
+  ```
+  npm i
+  ```
+- Crie um arquivo .env
+- Crie uma variável de ambiente chamada REACT_APP_API_URL e utilize a nossa API pública.
+- O seu arquivo .env deverá ficar da seguinte forma:
+
+```
+REACT_APP_API_URL=https://linkr-api-28og.onrender.com
+```
 Ademais,
 
 ### OBRIGADO PELA VISITA :D
