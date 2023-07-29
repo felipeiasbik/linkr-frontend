@@ -93,6 +93,7 @@ export const SwitchButton = styled.div`
   height: 65px;
   background-color: ${colors.main};
   text-decoration: underline;
+  color: ${colors.neutral};
   a{
     &:visited{
       color: ${colors.neutral};
