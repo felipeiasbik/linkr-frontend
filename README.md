@@ -7,10 +7,11 @@
 
 O Linkr é uma plataforma que permite aos usuários compartilhar e descobrir links interessantes. Com o frontend do Linkr, os usuários podem navegar pelos links compartilhados por outros usuários, adicionar seus próprios links e interagir com a comunidade, seguindo outros usuários, curtindo seus posts e comentando, além, é claro, de poder compartilhar suas publicações com sua própria rede.
 
-Este projeto foi construído em colaboração com:
+Este projeto foi construído em colaboração entre:
 
 - [Diego Becker](https://github.com/DiegoBeker)
 - [Felipe Iasbik](https://github.com/felipeiasbik)
+- [Filipe Tenedini](https://github.com/filipetenedini)
 - [Jhonathan Carvalho](https://github.com/csjhonathan)
 
 ### Principais recursos:
