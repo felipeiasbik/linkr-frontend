@@ -1,7 +1,7 @@
-# Linkr (Frontend) 
+# Linkr (Front-end) 
 <img src="./public/favicon.ico" alt="Linkr Logo" width="37" height="40">
 
-##### Neste repositório você encontrará a interface de usuário para a aplicação Linkr, uma plataforma de compartilhamento e descoberta de links. Este repositório contém o código-fonte do frontend do projeto.
+##### Neste repositório você encontrará a interface de usuário para a aplicação Linkr, uma plataforma de compartilhamento e descoberta de links. Este repositório contém o código-fonte do front-end do projeto.
 
 ### Visão Geral
 
