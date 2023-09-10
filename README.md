@@ -16,12 +16,12 @@ Este projeto foi construído em colaboração entre:
 
 ### Principais recursos:
 
-- Registro e login de usuários.
-- Página inicial com os links mais recentes.
-- Trending, onde o usuário pode ver a lista de tags(#) mais populares.
-- Feed personalizado, onde o usuário vê somente os posts dos usuários que segue.
-- Pesquisa de usuários pelo nome.
-- Adição e edição de links.
+- Registro e login de usuários;
+- Página inicial com os links mais recentes;
+- Trending, onde o usuário pode ver a lista de tags(#) mais populares;
+- Feed personalizado, onde o usuário vê somente os posts dos usuários que segue;
+- Pesquisa de usuários pelo nome;
+- Adição e edição de links;
 - Perfil de usuário com informações pessoais e links compartilhados.
 
 <br />
@@ -47,6 +47,5 @@ Vale a ressalva de que o acesso pode ser um pouco lento devido ao backend estar 
 ```
 REACT_APP_API_URL=https://linkr-api-28og.onrender.com
 ```
-Ademais,
 
 ### OBRIGADO PELA VISITA :D
