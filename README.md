@@ -24,6 +24,8 @@ Este projeto foi construído em colaboração entre:
 - Adição e edição de links.
 - Perfil de usuário com informações pessoais e links compartilhados.
 
+<img alt="Linkr" max-width="80%" src="https://github.com/felipeiasbik/linkr-frontend/blob/main/public/linkr-post-tt.gif?raw=true" />
+
 Para ver como ficou o projeto, basta acessar o link abaixo:
 
 [Linkr](linkr-frontend-delta.vercel.app/)
