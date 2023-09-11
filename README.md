@@ -26,7 +26,7 @@ Este projeto foi construído em colaboração entre:
 - Adição e edição de links;
 - Perfil de usuário com informações pessoais e links compartilhados.
 
-Para ver como ficou o projeto, basta acessar o link: [Linkr](linkr-frontend-delta.vercel.app/)
+Para ver como ficou o projeto, basta acessar o link: [Linkr](https://linkr-frontend-delta.vercel.app/)
 
 Vale a ressalva de que o acesso pode ser um pouco lento devido ao backend estar hospedado em uma plataforma gratuita. Mas tenha paciência :)
 
