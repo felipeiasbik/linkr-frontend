@@ -3,6 +3,8 @@
 
 ##### Neste repositório você encontrará a interface de usuário para a aplicação Linkr, uma plataforma de compartilhamento e descoberta de links. Este repositório contém o código-fonte do front-end do projeto.
 
+<img alt="Linkr" max-width="50%" src="https://github.com/felipeiasbik/linkr-frontend/blob/main/public/linkr-post-tt.gif?raw=true" />
+
 ### Visão Geral
 
 O Linkr é uma plataforma que permite aos usuários compartilhar e descobrir links interessantes. Com o frontend do Linkr, os usuários podem navegar pelos links compartilhados por outros usuários, adicionar seus próprios links e interagir com a comunidade, seguindo outros usuários, curtindo seus posts e comentando, além, é claro, de poder compartilhar suas publicações com sua própria rede.
@@ -24,12 +26,7 @@ Este projeto foi construído em colaboração entre:
 - Adição e edição de links;
 - Perfil de usuário com informações pessoais e links compartilhados.
 
-<br />
-<img alt="Linkr" max-width="50%" src="https://github.com/felipeiasbik/linkr-frontend/blob/main/public/linkr-post-tt.gif?raw=true" />
-<br />
-Para ver como ficou o projeto, basta acessar o link abaixo:
-
-[Linkr](linkr-frontend-delta.vercel.app/)
+Para ver como ficou o projeto, basta acessar o link: [Linkr](linkr-frontend-delta.vercel.app/)
 
 Vale a ressalva de que o acesso pode ser um pouco lento devido ao backend estar hospedado em uma plataforma gratuita. Mas tenha paciência :)
 
