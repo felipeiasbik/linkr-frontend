@@ -3,7 +3,7 @@
 
 ##### Neste repositório você encontrará a interface de usuário para a aplicação Linkr, uma plataforma de compartilhamento e descoberta de links. Este repositório contém o código-fonte do front-end do projeto.
 
-##### Algumas tecnologias usadas no projeto: *React, Styled-Components, Axios*.
+##### Algumas tecnologias usadas no projeto: *React, Styled-Components, Axios, jsonWebToken*.
 <br />
 
 <img alt="Linkr" max-width="50%" src="https://github.com/felipeiasbik/linkr-frontend/blob/main/public/linkr-post-tt.gif?raw=true" />
